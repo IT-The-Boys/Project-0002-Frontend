@@ -1,9 +1,11 @@
-import Chat from './components/chat';
+import Chat from 'components/chat';
+import Layout from 'views';
+
 
 function App() {
   return (
     <>
-    <Chat />
+      <Layout />
     </>
   );
 }
