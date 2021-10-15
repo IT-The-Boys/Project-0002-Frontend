@@ -1,4 +1,3 @@
-import Chat from 'components/chat';
 import Layout from 'views';
 
 

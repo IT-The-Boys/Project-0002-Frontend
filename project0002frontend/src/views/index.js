@@ -1,4 +1,4 @@
-import Chat from 'components/chat'
+import ChatPopup from 'components/popup/chatPopup'
 import Navbar from 'components/nav/Navbar'
 import React from 'react'
 import GameLobbyView from './GameLobbyView'
@@ -10,7 +10,7 @@ const index = () => {
         <div>
             <GameSelectorView />
             <div>
-                <Chat />
+                <ChatPopup />
                 <Navbar />
                 <div className="content">
                     <GameLobbyView />

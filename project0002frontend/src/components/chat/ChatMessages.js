@@ -1,8 +1,13 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import ChatMessage from './ChatMessage'
+import {WS_BASE_URL} from 'utils/constants/config'
 
-const ChatMessages = () => {
-    const messageList = [1, 2, 3]
+
+const ws=new WebSocket(WS_BASE_URL);
+
+const ChatMessages = ({messageList}) => {
+    
+    
     return (
         <div>
             {messageList.map(message => <ChatMessage message={message}/>)}
