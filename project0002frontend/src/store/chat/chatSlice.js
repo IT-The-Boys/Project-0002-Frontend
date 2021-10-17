@@ -82,7 +82,7 @@ const chatSlice = createSlice({
             })
         },
         switchRoom: (state, { payload }) => {
-            //set all channel inactive
+            //change channels state to new one
             state.channelList.forEach(c =>  c.isActive=(c.channelName===payload))
         },
     },
@@ -102,12 +102,7 @@ export const closeChat = () => async (dispatch) => {
 export const getCurrentChannel = createSelector(
     (state) => state.chat.channelList,
     (channelList) => {
-        let currentChannel;
-        channelList.map((c) => {
-            if (c.isActive) currentChannel = c;
-            return true;
-        })
-        return currentChannel;
+        return channelList.find(c=>c.isActive)
     }
 )
 
