@@ -9,7 +9,7 @@ const ChatMessage = ({ message }) => {
             <img alt="ProfileImage"
                 src={message.messageAuthor.userAvatar}
                 className="pic" />
-            {message.messageAuthor.userName}
+            {message.messageAuthor.userName} at {message.messageTimestamp}
         </div>
     )
 }

@@ -4,6 +4,7 @@ import ChatRoom from './ChatRoom'
 
 const ChatRoomList = () => {
     const channels=useSelector(state=>state.chat.channelList)
+
     return (
         <div className="contacts">
             <i className="fas fa-bars fa-2x"></i>

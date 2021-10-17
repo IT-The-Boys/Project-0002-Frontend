@@ -1,4 +1,5 @@
-import React from 'react'
+import ChatMessageForm from 'components/forms/ChatMessageForm';
+import React, { useEffect, useRef } from 'react'
 import { useSelector } from 'react-redux';
 import { getCurrentChannel } from 'store/chat/chatSlice';
 import ChatMessage from './ChatMessage';
@@ -7,9 +8,17 @@ const ChatWindow = () => {
     const channel = useSelector(getCurrentChannel)
 
     const messages = channel.channelMessages;
-    console.log(messages)
+    const ref = useRef(null)
+    useEffect(() => {
+        if (ref) {
+          ref.current.addEventListener('DOMNodeInserted', event => {
+            const { currentTarget: target } = event;
+            target.scroll({ top: target.scrollHeight, behavior: 'smooth' });
+          });
+        }
+      }, [])
     return (
-        <div className="chat">
+        <div className="chat" >
             <div className="contact bar">
                 <img className="pic" alt="channelImage" src={channel.channelImage} />
                 <div className="name">
@@ -19,7 +28,7 @@ const ChatWindow = () => {
                     Today at 12:56
                 </div>
             </div>
-            <div className="messages" id="chat">
+            <div className="messages" id="chat" ref={ref}>
                 {/* <div class="time">
                     Today at 11:41
                 </div> */}
@@ -30,9 +39,7 @@ const ChatWindow = () => {
                     <div class="typing typing-3"></div>
                 </div> */}
             </div>
-            <div className="input">
-                <input placeholder="Type your message here!" type="text" /><i className="fas fa-microphone"></i>
-            </div>
+            <ChatMessageForm />
         </div>
     )
 }

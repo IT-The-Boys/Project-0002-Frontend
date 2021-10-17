@@ -1,13 +1,20 @@
 import React from 'react'
+import { useDispatch } from 'react-redux'
+import { switchRoom } from 'store/chat/chatSlice'
 
-const ChatRoom = ({room}) => {
+const ChatRoom = ({ room }) => {
+    const dispatch = useDispatch()
+    const handleClick=()=>{
+        dispatch(switchRoom(room.channelName))
+    }
     return (
-        <div className={`contact ${room.isActive ? "active" : ""}`}>
-            {console.log(room)}
+        <div className="contact" onClick={handleClick}>
             <img src={room.channelImage} className="pic" alt="Global" />
-            <div className="badge">
-                14
-            </div>
+            {room.newMessagesCount > 0 &&
+                <div className="badge">
+                    {room.newMessagesCount}
+                </div>
+            }
             <div className="name">
                 {room.channelName}
             </div>

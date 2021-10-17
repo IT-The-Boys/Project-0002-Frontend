@@ -1,5 +1,4 @@
 
-import ChatModal from 'components/modals/ChatModal'
 import ActionButton from 'components/buttons/ActionButton'
 import Navbar from 'components/nav/Navbar'
 import React from 'react'
