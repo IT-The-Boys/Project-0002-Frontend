@@ -1,0 +1,25 @@
+
+.center {
+    position: absolute;
+    top: 50%;
+    left: calc(70% + 12rem);
+    transform: translate(-50%, -50%);
+}
+.pic {
+    width: 4rem;
+    height: 4rem;
+    background-size: cover;
+    background-position: center;
+    border-radius: 50%;
+}
+
+@keyframes typing {
+    0%, 75%, 100% {
+        transform: translate(0, 0.25rem) scale(0.9);
+        opacity: 0.5;
+   }
+    25% {
+        transform: translate(0, -0.25rem) scale(1);
+        opacity: 1;
+   }
+}
