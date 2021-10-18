@@ -1,10 +1,10 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit'
 import chat from './chat/chatSlice'
-import user from './user/userSlice'
+import auth from './auth/authSlice'
 import lobby from './lobby/lobbySlice'
 const reducer = combineReducers({
   chat,
-  user,
+  auth,
   lobby
 })
 

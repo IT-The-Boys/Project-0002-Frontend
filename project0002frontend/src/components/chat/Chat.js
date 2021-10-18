@@ -4,6 +4,7 @@ import ChatRoomList from './ChatRoomList'
 import ChatWindow from './ChatWindow'
 
 const Chat = () => {
+
     return (
         <ChatModal>
             <ChatRoomList />
