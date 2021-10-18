@@ -71,7 +71,6 @@ const chatSlice = createSlice({
                 if (c.isActive) c.channelMessages.push({
                     // ToDo UserSlice
                     // messageAuthor: state.user,
-
                     messageAuthor: {
                         userName: "Anon256",
                         userAvatar: null,
