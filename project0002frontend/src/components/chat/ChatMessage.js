@@ -1,18 +1,15 @@
 import React from 'react'
 
-const ChatMessage = () => {
-    const message={
-        text: "Hello",
-        profile: {
-            user_name: "Dmitry",
-            avatar_url: "google.com"
-        }
-    }
+const ChatMessage = ({ message }) => {
+
     return (
-        <div>
-            <img alt="ProfileImage" src={message.profile}/>{message.profile.user_name}
+        <div className={`message ${message.messageAuthor.userName === "Anon256" ? "parker" : ""}`}>
+            {message.messageText}
             <br />
-            {message.text}
+            <img alt="ProfileImage"
+                src={message.messageAuthor.userAvatar}
+                className="pic" />
+            {message.messageAuthor.userName} at {message.messageTimestamp}
         </div>
     )
 }
