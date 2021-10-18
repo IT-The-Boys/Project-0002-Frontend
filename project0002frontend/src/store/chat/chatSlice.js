@@ -68,17 +68,7 @@ const chatSlice = createSlice({
         },
         addMessage: (state, { payload }) => {
             state.channelList.forEach(c => {
-                if (c.isActive) c.channelMessages.push({
-                    // ToDo UserSlice
-                    // messageAuthor: state.user,
-                    messageAuthor: {
-                        userName: "Anon256",
-                        userAvatar: null,
-                        userEmail: null,
-                    },
-                    messageText: payload
-
-                })
+                if (c.isActive) c.channelMessages.push(payload)
             })
         },
         switchRoom: (state, { payload }) => {

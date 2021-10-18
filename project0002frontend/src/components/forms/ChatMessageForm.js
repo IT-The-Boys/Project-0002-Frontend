@@ -9,11 +9,17 @@ const ChatMessageForm = () => {
     const dispatch = useDispatch();
     const handleSubmit = (e) => {
         if (e.keyCode === 13) {
+            
             let message = {
-                messageAuthor: state.user,
+                messageAuthor:{
+                    userName: "Anon12",
+                    userPassphrase: "sdgfd",
+                    isRegistered: false,
+                },
                 messageText: text,
                 messageTimestamp: "12:25"
             }
+            console.log(message)
             dispatch(addMessage(message));
             setText("");
         }
