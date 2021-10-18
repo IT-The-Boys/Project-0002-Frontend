@@ -32,7 +32,7 @@ const ChatWindow = () => {
                 {/* <div class="time">
                     Today at 11:41
                 </div> */}
-                {messages.map(message => <ChatMessage message={message} />)}
+                {messages.map((message, index) => <ChatMessage message={message} key={index}/>)}
                 {/* <div class="message stark">
                     <div class="typing typing-1"></div>
                     <div class="typing typing-2"></div>

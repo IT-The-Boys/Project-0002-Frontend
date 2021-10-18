@@ -11,7 +11,7 @@ const ChatRoomList = () => {
             <h2>
                 Rooms
             </h2>
-            {channels.map(room => <ChatRoom room={room} />)}
+            {channels.map((room, index) => <ChatRoom room={room} key={index}/>)}
         </div>
     )
 }
