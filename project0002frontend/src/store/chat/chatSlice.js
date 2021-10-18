@@ -70,11 +70,6 @@ const chatSlice = createSlice({
             state.channelList.forEach(c => {
                 if (c.isActive) c.channelMessages.push({
                     // ToDo UserSlice
-<<<<<<< HEAD
-                    messageAuthor: payload.messageAuthor,
-                    messageText: payload.messageText,
-                    messageTimestamp:payload.messageTimestamp
-=======
                     // messageAuthor: state.user,
                     messageAuthor: {
                         userName: "Anon256",
@@ -82,7 +77,7 @@ const chatSlice = createSlice({
                         userEmail: null,
                     },
                     messageText: payload
->>>>>>> Redux-User
+
                 })
             })
         },
