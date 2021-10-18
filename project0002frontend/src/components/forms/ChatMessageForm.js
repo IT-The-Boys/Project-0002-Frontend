@@ -1,10 +1,11 @@
 import React, {  useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { addMessage } from 'store/chat/chatSlice';
 
 
 const ChatMessageForm = () => {
     const [text, setText] = useState("")
+    const state=useSelector((state)=>state);
     const dispatch = useDispatch();
     const handleSubmit = (e) => {
         if (e.keyCode === 13) {

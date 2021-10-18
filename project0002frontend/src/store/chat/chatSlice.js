@@ -70,19 +70,14 @@ const chatSlice = createSlice({
             state.channelList.forEach(c => {
                 if (c.isActive) c.channelMessages.push({
                     // ToDo UserSlice
-                    // messageAuthor: state.user,
-
-                    messageAuthor: {
-                        userName: "Anon256",
-                        userAvatar: null,
-                        userEmail: null,
-                    },
-                    messageText: payload
+                    messageAuthor: payload.messageAuthor,
+                    messageText: payload.messageText,
+                    messageTimestamp:payload.messageTimestamp
                 })
             })
         },
         switchRoom: (state, { payload }) => {
-            //change channels state to new one
+            //set all channel inactive
             state.channelList.forEach(c =>  c.isActive=(c.channelName===payload))
         },
     },
@@ -102,7 +97,12 @@ export const closeChat = () => async (dispatch) => {
 export const getCurrentChannel = createSelector(
     (state) => state.chat.channelList,
     (channelList) => {
-        return channelList.find(c=>c.isActive)
+        let currentChannel;
+        channelList.map((c) => {
+            if (c.isActive) currentChannel = c;
+            return true;
+        })
+        return currentChannel;
     }
 )
 
