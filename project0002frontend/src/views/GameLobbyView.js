@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import ServerList from 'components/serverlist'
 import GameFilterForm from 'components/forms/GameFilterForm'
-import CreateGamePopup from 'components/popup/createGamePopup'
+import CreateGamePopup from 'components/popup/CreateGamePopup';
 
 const GameLobbyView = () => {
     const [isOpen, setIsOpen] = useState(false);
