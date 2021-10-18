@@ -7,11 +7,14 @@ import GameScreenView from './GameScreenView'
 import GameSelectorView from './GameSelectorView'
 import Chat from 'components/chat/Chat'
 import BaseModal from 'components/modals/BaseModal'
+import { useSelector } from 'react-redux'
+import { getFilteredServerList } from '../store/lobby/lobbySlice'
 
-const index = () => {
-    
+const CaHView = () => {
+    const lobby = useSelector(getFilteredServerList)
     return (
         <div>
+            {console.log(lobby)}
             <ActionButton />
             <GameSelectorView />
             <div>
@@ -29,4 +32,4 @@ const index = () => {
     )
 }
 
-export default index
+export default CaHView
