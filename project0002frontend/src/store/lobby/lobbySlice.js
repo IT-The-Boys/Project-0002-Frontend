@@ -1,7 +1,7 @@
 const { createSlice } = require("@reduxjs/toolkit");
 
 const initialState = {
-    lobbyServer: null,
+    lobbyServer: "url",
     serverList: [
         {
             playerList: ["DM", "DA", "SH"],
@@ -14,7 +14,7 @@ const initialState = {
         {
             playerList: ["Dude", "boose", "gun"],
             playerLimit: 5,
-            serverName: "best game",
+            serverName: "best dfsf",
             serverStatus: "PENDING",
             serverId: "a657a776-f726-44ad-b9a2-75f2b52d2cd9",
             sets: [1,2]
