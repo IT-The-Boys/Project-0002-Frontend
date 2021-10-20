@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import ServerList from 'components/serverlist'
+import ServerList from 'components/list/LobbyServerList'
 import GameFilterForm from 'components/forms/GameFilterForm'
 import CreateGamePopup from 'components/popup/CreateGamePopup';
 
