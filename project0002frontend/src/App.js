@@ -1,10 +1,9 @@
-import Layout from 'views';
-
+import CaHView from "views/CahView";
 
 function App() {
   return (
     <>
-      <Layout />
+      <CaHView />
     </>
   );
 }
