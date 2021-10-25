@@ -5,16 +5,48 @@ const initialState = {
     serverDefaultSettings:
     {
         playerLimit: 3,
-        serverName: "",
+        serverName: "default server name",
         serverPassword: "123qwecc",
         timeLimit: 60,
         scoreLimit: 8,
-        sets: [0,],
+        setList: [
+            {
+            id: 0,
+            setName: 'Basic',
+            isChecked: false,
+            },
+            {
+            id: 1,
+            setName: 'Banana',
+            isChecked: false,    
+            },
+            {
+            id: 2,
+            setName: 'Ass',
+            isChecked: false,
+            },
+            {
+            id: 3,
+            setName: 'Sexy',
+            isChecked: false,    
+            },
+            {
+            id: 4,
+            setName: 'Drink',
+            isChecked: false,
+            },
+            {
+            id: 5,
+            setName: 'Food',
+            isChecked: false,
+            }
+        ],
+        setSelectedList: [],
     },
     serverFilter:
     //pass function as argument
     {
-        playerList: list=>list.includes("DA"),
+        playerList: 0,
         playerLimit: 0,
         serverHost: {},
         serverName: "",
@@ -22,8 +54,20 @@ const initialState = {
         serverId: 0,
         timeLimit: 60,
         timeRunning: 0,
-        scoreLimit: limit => limit < 5,
-        sets: [],
+        scoreLimit: limit => limit < 8,
+        setList: [
+            {
+            id:0,
+            setName:"basic"
+            },
+            {
+            id:1,
+            setName:"se2"       
+            }
+        ],
+        setSelectedList:[
+
+        ],
     },
     serverList: [
         {
@@ -59,6 +103,7 @@ const initialState = {
             sets: [1, 2],
             scoreLimit:7
         },
+        
     ]
 }
 

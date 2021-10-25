@@ -1,14 +1,18 @@
 import React from 'react'
-import { useSelector } from 'react-redux';
+import { useSelector } from 'react-redux'
+import { getFilteredServerList } from 'store/lobby/lobbySlice'
+import ServerCard from './ServerCard'
 
 const LobbyServerList = () => {
-    const lobby = useSelector((state) => state.lobby);
+    const servers = useSelector(getFilteredServerList);
     return (
         <div>
-        {lobby.lobbyServer}
-         {lobby.serverList.map(s=>{
-             return <h1>{s.sets}</h1>
-         })}
+            {servers.map((s, index)=>{
+                return <ServerCard key={index} 
+                servername={s.serverName} 
+                serverstatus={s.serverStatus} 
+                scorelimit={s.scoreLimit} sets={s.sets}/>
+            })}
         </div>
     )
 }
