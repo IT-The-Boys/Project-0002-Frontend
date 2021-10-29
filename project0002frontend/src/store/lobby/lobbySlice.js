@@ -48,13 +48,13 @@ const initialState = {
     {
         playerList: 0,
         playerLimit: 0,
-        serverHost: {},
+        serverHost: "",
         serverName: "",
         serverStatus: "",
         serverId: 0,
         timeLimit: 60,
         timeRunning: 0,
-        scoreLimit: limit => limit < 8,
+        scoreLimit: 0,
         setList: [
             {
             id:0,

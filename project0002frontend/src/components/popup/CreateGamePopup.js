@@ -6,7 +6,7 @@ const CreateGamePopup = (props) => {
     const defaultSettings = useSelector(state=>state.lobby.serverDefaultSettings)
 console.log('defaultSettings from useSelector')
 console.log(defaultSettings)
-    const [setting, setSetting] = useState(defaultSettings)
+    let [setting, setSetting] = useState(defaultSettings)
 console.log('settings from state')
 console.log(setting)
 

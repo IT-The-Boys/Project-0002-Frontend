@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import ServerList from 'components/list/LobbyServerList'
-import GameFilterForm from 'components/forms/GameFilterForm'
+import GameFilterForm from 'components/forms/GameFilterForm/GameFilterForm'
 import CreateGamePopup from 'components/popup/CreateGamePopup';
 
 const GameLobbyView = () => {
