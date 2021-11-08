@@ -48,13 +48,15 @@ const initialState = {
     {
         playerList: 0,
         playerLimit: 0,
-        serverHost: "",
+        serverHost: {   userName: "",
+                        userAvatar:"",
+                        userEmail:"" },
         serverName: "",
         serverStatus: "",
         serverId: 0,
         timeLimit: 60,
         timeRunning: 0,
-        scoreLimit: 0,
+        scoreLimit:0,
         setList: [
             {
             id:0,
@@ -103,7 +105,6 @@ const initialState = {
             sets: [1, 2],
             scoreLimit:7
         },
-        
     ]
 }
 
@@ -117,6 +118,8 @@ const lobbySlice = createSlice({
         setFilter: (state, { payload }) => {
             Object.entries(payload).forEach(
                 ([key, value]) => {
+                    // console.log(key);
+                    // console.log(value)
                     state.serverFilter[key] = value;
                 });
         }
@@ -141,5 +144,5 @@ export const getFilteredServerList = createSelector(
     }
 )
 
-export const { } = lobbySlice.actions;
+export const { setFilter } = lobbySlice.actions;
 export default lobbySlice.reducer

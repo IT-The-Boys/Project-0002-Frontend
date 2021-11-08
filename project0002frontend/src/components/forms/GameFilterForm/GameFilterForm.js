@@ -1,21 +1,47 @@
 import React, { useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { setFilter } from 'store/lobby/lobbySlice'
 
 const GameFilterForm = () => {
-    const filters = useSelector(state=>state.lobby.serverFilter)
-    let [filter, setFilter] = useState(filters)
+    const [host, setHost] = useState("")
+    const [server, setServer] = useState("")
+    const [score, setScore] = useState(0)
+    const tmp = useSelector(state => state.lobby.serverFilter)
+    const state = useSelector((state) => state)
+    const dispatch = useDispatch()
 
+    const handleSubmit = (e) => {
+        if (e.keyCode === 13){
+            let filterData = {
+                playerList: 0,
+                playerLimit: 0,
+                serverHost: {   userName: shost => shost.includes(host),
+                                userAvatar:"",
+                                userEmail:"" },
+                serverName: "", //sname => sname.includes(server),
+                serverStatus: "",
+                serverId: 0,
+                timeLimit: 60,
+                timeRunning: 0,
+                scoreLimit: 0,
+                setList: [{id:0, setName:"basic"}, {id:1, setName:"se2"}],
+                setSelectedList:[],
+            }
+            //console.log(filterData)
+            dispatch(setFilter(filterData))
+            //console.log(tmp)
+        }
+    }
 
     return (
         <div>
         <fieldset>
             <label htmlFor='serverHost'>Server Host Name:     </label>
-            <input type='text' id='serverHost' onInput={e => setFilter(e.target.serverHost)} /><br/>
+            <input type='text' value={host} id='serverHost' onChange={e => setHost(e.target.value)} onKeyUp={handleSubmit} /><br/>
             <label htmlFor='serverName'>Server Name:          </label>
-            <input type='text' id='serverName' onInput={e => setFilter(e.target.serverName)} /><br/>
+            <input type='text' value={server} id='serverName' onChange={e => setServer(e.target.value)} onKeyUp={handleSubmit} /><br/>
             <label htmlFor='scoreLimit'>scoreLimit(Test Data):</label>
-            <input type='number' min='1' max='10' id='scoreLimit' onInput={e => setFilter(e.target.scoreLimit)} />
-            <button onClick={console.log(filter)}>get filter</button>
+            <input type='number' value={score} min='1' max='10' id='scoreLimit' onChange={e => setScore(e.target.value)} onKeyUp={handleSubmit} />
         </fieldset>
         </div>
     )

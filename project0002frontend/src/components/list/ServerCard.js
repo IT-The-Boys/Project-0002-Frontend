@@ -7,6 +7,7 @@ const ServerCard = (props) => {
             <p>This game is {props.serverstatus}</p>
             <p>score limit: {props.scorelimit}</p>
             <p>card sets: {props.sets}</p>
+            <button type="submit" >Join Game</button>
         </fieldset></div>
     )
 }
