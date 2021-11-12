@@ -1,17 +1,24 @@
 
-import React from 'react'
+import AnswerSelectPopup from 'components/popup/AnswerSelectPopup';
+import React, { useState }  from 'react'
 
 const GameScreenView = () => {
+    const [isOpen, setIsOpen] = useState(false);
+
+    const togglePopup = () => {
+        setIsOpen(!isOpen);
+    }
+
     return (
         <div>
-            <h1>GameScreenView</h1>
-            {/* <GameStartPopup /> */}
-            <div className='gameArea'>
-                {/* <Question />
-                <Answers />
-                <Hand />
-                <GameStatus /> */}
+            <h1>GameAnswerSelectionView</h1>
+            <div>
+                <input type='button' value='Create Your Answer' onClick={togglePopup} />
+                {isOpen && <AnswerSelectPopup
+                    handleClose={togglePopup}
+                />}
             </div>
+            {/* <ServerList /> */}
         </div>
     )
 }

@@ -1,0 +1,30 @@
+.users{
+    float: left;
+    margin: 5px;
+    padding: 5px;
+    width: 200px;
+    height: 250px;
+    border-style: solid;
+    border-width: 2px;
+    border-color: black;
+    border-radius: 3px;
+    font-size: auto;
+    font-family: 'Courier New', Courier, monospace;
+}
+.card{
+    float: left;
+    margin: 5px;
+    padding: 5px;
+    width: 200px;
+    height: 250px;
+    border-style: solid;
+    border-width: 2px;
+    border-color: black;
+    border-radius: 3px;
+    font-size: auto;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+/* .card:hover{
+    background-color:rgb(132, 126, 192);
+} */
