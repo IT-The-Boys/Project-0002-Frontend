@@ -16,9 +16,7 @@ const GameFilterForm = () => {
             let filterData = {
                 playerList: 0,
                 playerLimit: 0,
-                serverHost: {   userAvatar:"",
-                                userEmail:"",
-                                userName: host },
+                serverHost: shost=>shost.userName.includes(host),
                 serverName: sname => sname.includes(server),
                 serverStatus: "",
                 serverId: 0,
