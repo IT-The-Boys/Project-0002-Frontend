@@ -11,7 +11,9 @@ const LobbyServerList = () => {
                 return <ServerCard key={index} 
                 servername={s.serverName} 
                 serverstatus={s.serverStatus} 
-                scorelimit={s.scoreLimit} sets={s.sets}/>
+                scorelimit={s.scoreLimit} 
+                timelimit={s.timeLimit} 
+                sets={s.sets}/>
             })}
         </div>
     )

@@ -5,7 +5,8 @@ import { setFilter } from 'store/lobby/lobbySlice'
 const GameFilterForm = () => {
     const [host, setHost] = useState("")
     const [server, setServer] = useState("")
-    const [score, setScore] = useState(0)
+    const [score, setScore] = useState(5)
+    const [time, setTime] = useState(120)
     const tmp = useSelector(state => state.lobby.serverFilter)
     const state = useSelector((state) => state)
     const dispatch = useDispatch()
@@ -15,15 +16,15 @@ const GameFilterForm = () => {
             let filterData = {
                 playerList: 0,
                 playerLimit: 0,
-                serverHost: {   userName: shost => shost.includes(host),
-                                userAvatar:"",
-                                userEmail:"" },
-                serverName: "", //sname => sname.includes(server),
+                serverHost: {   userAvatar:"",
+                                userEmail:"",
+                                userName: host },
+                serverName: sname => sname.includes(server),
                 serverStatus: "",
                 serverId: 0,
-                timeLimit: 60,
+                timeLimit: t => t <= time,
                 timeRunning: 0,
-                scoreLimit: 0,
+                scoreLimit: s => s <= score,
                 setList: [{id:0, setName:"basic"}, {id:1, setName:"se2"}],
                 setSelectedList:[],
             }
@@ -42,6 +43,8 @@ const GameFilterForm = () => {
             <input type='text' value={server} id='serverName' onChange={e => setServer(e.target.value)} onKeyUp={handleSubmit} /><br/>
             <label htmlFor='scoreLimit'>scoreLimit(Test Data):</label>
             <input type='number' value={score} min='1' max='10' id='scoreLimit' onChange={e => setScore(e.target.value)} onKeyUp={handleSubmit} />
+            <label htmlFor='timeLimit'>Time Limit:     </label>
+            <input type='number' value={time} id='timeLimit' min='10' max='120' step='10' onChange={e => setTime(e.target.value)} onKeyUp={handleSubmit} /><br/>
         </fieldset>
         </div>
     )

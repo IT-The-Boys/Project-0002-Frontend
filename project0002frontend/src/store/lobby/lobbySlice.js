@@ -76,9 +76,9 @@ const initialState = {
             playerList: ["DM", "DA", "SH"],
             playerLimit: 8,
             serverHost: {
-                userName: "DM",
                 userAvatar: "https://scontent.fhnd3-1.fna.fbcdn.net/v/t1.6435-9/243628091_4471297046284910_1933180873813140017_n.jpg?_nc_cat=110&ccb=1-5&_nc_sid=09cbfe&_nc_ohc=_52vMiqO5IsAX-oXpF6&_nc_ht=scontent.fhnd3-1.fna&oh=8ca642be8b5c07ba155ff8b0b77639c7&oe=618EB373",
                 userEmail: "admin@admin.com",
+                userName: "testplayer",
             },
             serverName: "best game",
             serverStatus: "IN_PROGRESS",
@@ -92,15 +92,14 @@ const initialState = {
             playerList: ["Dude", "boose", "gun"],
             playerLimit: 5,
             serverHost: {
-                userName: "DM",
                 userAvatar: "https://scontent.fhnd3-1.fna.fbcdn.net/v/t1.6435-9/243628091_4471297046284910_1933180873813140017_n.jpg?_nc_cat=110&ccb=1-5&_nc_sid=09cbfe&_nc_ohc=_52vMiqO5IsAX-oXpF6&_nc_ht=scontent.fhnd3-1.fna&oh=8ca642be8b5c07ba155ff8b0b77639c7&oe=618EB373",
                 userEmail: "admin@admin.com",
+                userName: "fucktheplayer",
             },
             serverName: "best dfsf",
-
             serverStatus: "PENDING",
             serverId: "a657a776-f726-44ad-b9a2-75f2b52d2cd9",
-            timeLimit: 60,
+            timeLimit: 90,
             timeRunning: 40,
             sets: [1, 2],
             scoreLimit:7
@@ -118,8 +117,8 @@ const lobbySlice = createSlice({
         setFilter: (state, { payload }) => {
             Object.entries(payload).forEach(
                 ([key, value]) => {
-                    // console.log(key);
-                    // console.log(value)
+                    console.log(key);
+                    console.log(value)
                     state.serverFilter[key] = value;
                 });
         }
