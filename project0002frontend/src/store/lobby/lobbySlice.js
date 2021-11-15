@@ -4,12 +4,13 @@ const initialState = {
     lobbyServer: null,
     serverDefaultSettings:
     {
-        playerLimit: 3,
+        playerLimit: 10,
         serverName: "",
         serverPassword: "123qwecc",
         timeLimit: 60,
         scoreLimit: 8,
-        sets: [0,],
+        setList: [0,1,2,3,4,5],
+        setSelectedList:[]
     },
     serverFilter:
     //pass function as argument
