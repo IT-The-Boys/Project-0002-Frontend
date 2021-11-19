@@ -1,25 +1,27 @@
 import LoginForm from 'components/forms/LoginForm'
 import RegistrationForm from 'components/forms/RegistrationForm'
 import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { switchToLogin, switchToRegister } from 'store/auth/authSlice'
 
-const AuthenticationPopup = ({toggle}) => {
-    const [signup, setSignup] = useState(false)
+const AuthenticationPopup = () => {
+    const { isOpen, registerMode } = useSelector(state => state.auth)
+    const dispatch = useDispatch()
     return (
         <div>
             <div>
-            <button
-                    onClick={()=>setSignup(true)}
+                <button
+                    onClick={() => dispatch(switchToRegister())}
                 >
                     register
                 </button>
                 <button
-                    onClick={()=>setSignup(false)}
+                    onClick={() => dispatch(switchToLogin())}
                 >
                     Login
                 </button>
             </div>
-            {!signup && <LoginForm toggle={toggle}/>}
-            {signup && <RegistrationForm/>}
+            {registerMode ? <RegistrationForm /> : <LoginForm />}
         </div>
     )
 }

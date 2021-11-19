@@ -1,9 +1,12 @@
 import React, { useState } from 'react'
-import { useDispatch} from 'react-redux';
-import { login } from 'store/auth/authSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { hideDialog, login } from 'store/auth/authSlice';
 
-const LoginForm = ({toggle}) => {
+const LoginForm = ({ toggle }) => {
+    const {fromURL} = useSelector(state => state.auth)
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const [form, setForm] = useState({
         username: "",
         password: "",
@@ -17,14 +20,15 @@ const LoginForm = ({toggle}) => {
     }
     const handleSubmit = (e) => {
         e.preventDefault();
-        
+
         const { username, password } = form
         // sendDetailsToServer()    
-        dispatch(login({username, password }))
+        dispatch(login({ username, password }))
             .unwrap()
             .then(() => {
                 console.log("successful")
-                toggle();
+                dispatch(hideDialog())
+                navigate(fromURL)
             })
             .catch(() => {
                 console.log("not successful")
