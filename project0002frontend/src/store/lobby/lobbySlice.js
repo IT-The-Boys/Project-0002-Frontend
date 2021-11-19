@@ -4,44 +4,13 @@ const initialState = {
     lobbyServer: null,
     serverDefaultSettings:
     {
-        playerLimit: 3,
-        serverName: "default server name",
+        playerLimit: 10,
+        serverName: "",
         serverPassword: "123qwecc",
         timeLimit: 60,
         scoreLimit: 8,
-        setList: [
-            {
-            id: 0,
-            setName: 'Basic',
-            isChecked: false,
-            },
-            {
-            id: 1,
-            setName: 'Banana',
-            isChecked: false,    
-            },
-            {
-            id: 2,
-            setName: 'Ass',
-            isChecked: false,
-            },
-            {
-            id: 3,
-            setName: 'Sexy',
-            isChecked: false,    
-            },
-            {
-            id: 4,
-            setName: 'Drink',
-            isChecked: false,
-            },
-            {
-            id: 5,
-            setName: 'Food',
-            isChecked: false,
-            }
-        ],
-        setSelectedList: [],
+        setList: [0,1,2,3,4,5],
+        setSelectedList:[]
     },
     serverFilter:
     //pass function as argument

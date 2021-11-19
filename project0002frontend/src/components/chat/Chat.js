@@ -7,7 +7,7 @@ const Chat = () => {
 
     return (
         <ChatModal>
-            <ChatRoomList />
+            {/* <ChatRoomList /> */}
             <ChatWindow />
         </ChatModal>
     )
