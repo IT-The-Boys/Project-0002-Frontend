@@ -4,8 +4,6 @@ import BlackCard from './BlackCard'
 import Title from './TitleName'
 import ButtonConfirm from './Button/ButtonConfirm'
 // import ButtonLeave from './Button/ButtonLeave'
-import Nav from './Nav'
-import './GameAnswer.css'
 
 
 export default class CreateGameAnswer extends Component {
@@ -44,7 +42,6 @@ export default class CreateGameAnswer extends Component {
                 {/* <GameStartPopup /> */}
                 <div className='gameAnswerSelectionArea'>
                     <div><Title /></div>
-                    <div><Nav /></div>
                     <div className="cardsBox">
                         <div className="blackcard"><BlackCard blackcard={this.state.blackcard}/></div>
                         <div className="white">
@@ -70,8 +67,8 @@ export default class CreateGameAnswer extends Component {
                 <GameStatus /> */}
                     {/* <button onClick={startGame}> Start Game </button> */}
                     {/* -><CreateGamePopup />> */}
-                </div>
-            </div>
+                 </div>
+             </div>
         )
     }
 }

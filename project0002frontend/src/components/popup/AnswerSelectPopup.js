@@ -4,9 +4,15 @@ import BlackCard from '../GameAnswer/BlackCard'
 import Title from '../GameAnswer/TitleName'
 import ButtonConfirm from '../GameAnswer/Button/ButtonConfirm'
 // import ButtonLeave from './Button/ButtonLeave'
-import Nav from '../GameAnswer/Nav'
 import '../GameAnswer/GameAnswer.css'
 import Answer from 'components/CardsAgainsHumanity/Answer'
+import './AnswerSelectPopup'
+import styled from 'styled-components'
+
+const Popup = styled.div`
+width:100%;
+height:100%;
+`
 
 const AnswerSelectPopup = () => {
 
@@ -36,17 +42,17 @@ const AnswerSelectPopup = () => {
     }
 
     return (
-         <div>
+         <Popup>
                 <h1>GameAnswerSelectionView</h1>
               
                 {/* <GameStartPopup /> */}
                 <div className='gameAnswerSelectionArea'>
                     <div><Title /></div>
-                    <div><Nav /></div>
                     <div className="cardsBox">
                         <div className="blackcard"><BlackCard blackcard={state.blackcard}/></div>
                         <div className="white">
                             <p>The white cards played this round are:</p>
+                    
                             <div className="whitecard">
                                 { state.answers.map(
                                     (answer, index)=> <Answer answer={answer} 
@@ -71,7 +77,7 @@ const AnswerSelectPopup = () => {
                     {/* <button onClick={startGame}> Start Game </button> */}
                     {/* -><CreateGamePopup />> */}
                 </div>
-            </div>
+            </Popup>
     )
 }
 

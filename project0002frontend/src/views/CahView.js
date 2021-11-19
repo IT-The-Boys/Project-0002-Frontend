@@ -5,7 +5,6 @@ import React from 'react'
 import GameLobbyView from './GameLobbyView'
 import GameScreenView from './GameScreenView'
 import GameSelectorView from './GameSelectorView'
-import GameAnswerSelectionView from './GameAnswerSelectionView'
 import Chat from 'components/chat/Chat'
 import BaseModal from 'components/modals/BaseModal'
 import { useSelector } from 'react-redux'
@@ -25,7 +24,6 @@ const CaHView = () => {
                 <div className="content">
                     <GameLobbyView />
                     <GameScreenView />
-                    {/* <GameAnswerSelectionView /> */}
                 </div>
 
             </div>
