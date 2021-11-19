@@ -2,11 +2,17 @@
 
 import React from 'react'
 import Chat from 'components/chat/Chat'
+
+import BaseModal from 'components/modals/BaseModal'
+import { useSelector } from 'react-redux'
+import { getFilteredServerList } from '../store/lobby/lobbySlice'
 import Router from 'routes/Router'
-const index = () => {
-    
+
+const CaHView = () => {
+    const lobby = useSelector(getFilteredServerList)
     return (
         <div>
+            {console.log(lobby)}
             <div>
                 <Chat />
                 {/* {open && <AuthenticationPopup toggle={toggleHandler}/>} */}
@@ -20,4 +26,4 @@ const index = () => {
     )
 }
 
-export default index
+export default CaHView
