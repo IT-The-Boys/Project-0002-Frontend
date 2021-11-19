@@ -11,10 +11,12 @@ const Img= styled.img`
   object-fit: contain
   `
 
-const LobbyCard = ({lobby, onClick}) => {
+const LobbyCard = ({lobby, handleClick}) => {
     return (
-        <Card onClick={onClick}>
+        <Card>
         <Img src={lobby.lobbyImg} alt={lobby.lobbyId}/>
+        <button onClick={()=>handleClick('lobby/'+lobby.lobbyId.toLowerCase())}>to lobby</button>
+        <button onClick={()=>handleClick('wiki/'+lobby.lobbyId.toLowerCase())}>to wiki</button>
         </Card>
     )
 }

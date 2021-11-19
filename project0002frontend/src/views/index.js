@@ -1,26 +1,17 @@
 
-import ActionButton from 'components/buttons/ActionButton'
-import Navbar from 'components/nav/Navbar'
-import React from 'react'
-import GameLobbyView from './GameLobbyView'
-import GameScreenView from './GameScreenView'
-import GameSelectorView from './GameSelectorView'
-import Chat from 'components/chat/Chat'
-import BaseModal from 'components/modals/BaseModal'
 
+import React from 'react'
+import Chat from 'components/chat/Chat'
+import Router from 'routes/Router'
 const index = () => {
     
     return (
         <div>
-            <ActionButton />
-            <GameSelectorView />
             <div>
-                <BaseModal width="50%"/>
                 <Chat />
-                <Navbar />
+                {/* {open && <AuthenticationPopup toggle={toggleHandler}/>} */}
                 <div className="content">
-                    <GameLobbyView />
-                    <GameScreenView />
+                    <Router/>
                 </div>
 
             </div>
