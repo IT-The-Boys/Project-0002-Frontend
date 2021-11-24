@@ -27,7 +27,6 @@ const LoginForm = ({ toggle }) => {
             .unwrap()
             .then(() => {
                 console.log("successful")
-                dispatch(hideDialog())
                 navigate(fromURL)
             })
             .catch(() => {

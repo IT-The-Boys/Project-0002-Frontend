@@ -10,9 +10,9 @@ const PrivateRoute = () => {
     const location = useLocation();
     useEffect(() => {
         if (!isAuthenticated){
+            navigate("/");
             dispatch(recordFromUrl(location.pathname));
             dispatch(showDialog());
-            navigate("/")
         }
 
         

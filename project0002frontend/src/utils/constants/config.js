@@ -1,2 +1,2 @@
-export const WS_BASE_URL="wss://localhost";
-export const API_BASE_URL="http://localhost"
+export const CHAT_SERVICE_URL = 'http://127.0.0.1:8080/api/v1/ws/chat/';
+export const AUTH_URL = 'http://localhost:8080/api/v1/user/'

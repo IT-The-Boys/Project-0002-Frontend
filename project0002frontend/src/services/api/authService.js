@@ -1,12 +1,11 @@
 import axios from "axios";
 import _decode from "jwt-decode";
-
-const API_URL = "http://localhost:8080/api/v1/user/";
+import { AUTH_URL } from "utils/constants/config";
 
 const register = (email, username, password) => {
   return axios({
       method: "post",
-      url: API_URL + "signup",
+      url: AUTH_URL + "signup",
       data: {
         "userName": username,
         "userContact": email,
@@ -17,33 +16,31 @@ const register = (email, username, password) => {
 };
 
 const guestLogin = (username, password) => {
-  return axios.post(API_URL + "signup", {
+  return axios.post(AUTH_URL + "signup", {
     userName: username,
     password: password
   }
   )
 };
 
-const login = (username, password) => {
+const login = async (username, password) => {
   const formData = new FormData();
   formData.append("userName", username)
   formData.append("password", password)
-  return axios({
-      method: "post",
-      url: API_URL + "signin",
-      data: formData,
-      headers: { "Content-Type": "multipart/form-data" },
-    })
-    .then((response) => {
-      if (response.data.access_token) {
-        let userData = _decode(response.data.access_token);
-        userData["access_token"] = response.data.access_token;
-        userData["refresh_token"] = response.data.refresh_token;
-        localStorage.setItem("user", JSON.stringify(userData));
-        return userData;
-      }
-      return response.data;
-    });
+  const response = await axios({
+    method: "post",
+    url: AUTH_URL + "signin",
+    data: formData,
+    headers: { "Content-Type": "multipart/form-data" },
+  });
+  if (response.data.access_token) {
+    let userData = _decode(response.data.access_token);
+    userData["access_token"] = response.data.access_token;
+    userData["refresh_token"] = response.data.refresh_token;
+    localStorage.setItem("user", JSON.stringify(userData));
+    return userData;
+  }
+  return response.data;
 };
 
 const logout = () => {

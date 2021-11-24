@@ -18,9 +18,8 @@ const Router = () => {
                 <Route path="/lobby/:lobbyId" element={<PrivateRoute />} >
                     <Route path="/lobby/:lobbyId" element={<GameLobbyView />} />
                 </Route>
-
-                <Route path="/wiki/:gameId" element={<GameWikiView />} />
-                <Route path="/game" element={<GameScreenView />} />
+                <Route path="/wiki/:game" element={<GameWikiView />} />
+                <Route path="/game/:serverId" element={<GameScreenView />} />
                 <Route
                     path=":pageName"
                     element={
