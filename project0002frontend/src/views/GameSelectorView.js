@@ -8,8 +8,8 @@ import { getLobbyList } from '../store/app/appSlice';
 
 
 const GameSelectorView = () => {
-    const { isOpen, isAuthenticated } = useSelector((state) => state.auth);
-    const { lobbyList, status, error } = useSelector((state) => state.app);
+    const { isOpen } = useSelector((state) => state.auth);
+    const { lobbyList, status } = useSelector((state) => state.app);
     let navigate = useNavigate();
     const dispatch = useDispatch();
     const handleClick = (path) => {

@@ -73,9 +73,7 @@ export const connectToChat = createAsyncThunk(
             // thunkAPI.dispatch(setMessage(response.data.message));
         } catch (error) {
             const message = error.response.data;
-            // thunkAPI.dispatch(setMessage(message));
-            console.log(message);
-            return thunkAPI.rejectWithValue();
+
         }
     }
 );

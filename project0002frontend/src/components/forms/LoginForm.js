@@ -67,6 +67,7 @@ const LoginForm = ({ toggle }) => {
                     Login
                 </button>
             </form>
+            <button onClick={()=>dispatch(hideDialog())}>close</button>
         </div>
     )
 }

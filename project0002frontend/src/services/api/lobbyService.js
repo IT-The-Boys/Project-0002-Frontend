@@ -1,11 +1,12 @@
 import axios from "axios";
+import { LOBBY_URL } from "utils/constants/config";
 
-const API_URL = "http://localhost:8080/api/v1/lobby/";
 
 const getLobbyList = () => {
+  console.log(LOBBY_URL)
   return axios({
       method: "get",
-      url: API_URL,
+      url: LOBBY_URL,
     })
 };
 

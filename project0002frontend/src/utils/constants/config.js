@@ -1,2 +1,6 @@
-export const CHAT_SERVICE_URL = 'http://127.0.0.1:8080/api/v1/ws/chat/';
-export const AUTH_URL = 'http://localhost:8080/api/v1/user/'
+
+export const API_URL = "http://project0002api-env.eba-mqxhmnfg.us-east-1.elasticbeanstalk.com/api/v1/";
+export const AUTH_URL = API_URL+'user/';
+export const LOBBY_URL = API_URL+'lobby/';
+
+export const CHAT_SERVICE_URL = API_URL+'ws/chat/';

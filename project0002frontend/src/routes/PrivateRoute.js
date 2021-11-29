@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import {  Navigate, useNavigate, useLocation, Outlet } from 'react-router-dom'
+import {  useNavigate, useLocation, Outlet } from 'react-router-dom'
 import { recordFromUrl, showDialog } from 'store/auth/authSlice';
 
 const PrivateRoute = () => {

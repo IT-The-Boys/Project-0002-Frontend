@@ -1,8 +1,7 @@
+import { useDispatch } from 'react-redux';
 import SockJS from 'sockjs-client';
 import Stomp from 'stompjs';
 import { CHAT_SERVICE_URL } from 'utils/constants/config';
-
-
 
 let _client = null;
 const _subscriptions = new Map();;
@@ -42,19 +41,20 @@ const _unsubscribe = (topic) => {
 }
 
 
-const _connect = () => {
+const _connect = (callback) => {
     _initialize();
     _client.connect(
         //toDO get jwt header
         {},
-        _connectHandler,
+        _connectHandler(callback),
         _errorHandler
     )
 }
 // handle successful connect to wsServer
-const _connectHandler = () => {
+const _connectHandler = (callback) => {
     _isConnected = true;
     _subscribe("/chat/monitor");
+    callback();
 }
 // handle connection error to wsServer
 const _errorHandler = (e) => {
@@ -65,18 +65,20 @@ const _errorHandler = (e) => {
     _timeoutId = setTimeout(_connect(), _getRetryInterval(_retryCount++))
 }
 
-const startChat = () => {
+const startChat = (callback) => {
     if (!_isConnected) {
-        _connect()
+        _connect(callback)
     }
 }
 const sendTo = (msg) => {
     if (_isConnected) {
-        let room="/chat/monitor";
+        let room="/api/v1/ws/chat/monitor";
         console.log(JSON.stringify(msg));
         _client.send(room, {}, JSON.stringify(msg));  
+    } else {
+        console.log("error")
     }
-    console.log("error")
+    
 }
 
 const chatService = {
