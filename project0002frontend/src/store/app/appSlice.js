@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import lobbyService from "services/api/lobbyService";
 
 export const getLobbyList = createAsyncThunk(
-    "auth/register",
+    "app/fetchLobby",
     async (thunkAPI) => {
         try {
             const response = await lobbyService.getLobbyList();
@@ -41,9 +41,5 @@ const appSlice = createSlice({
         }
     },
 })
-
-
-export const { } = appSlice.actions
-
 
 export default appSlice.reducer

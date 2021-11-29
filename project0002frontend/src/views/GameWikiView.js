@@ -52,11 +52,21 @@ const SetBlock = () => {
     )
 }
 
+const SetViewBlock = () => {
+    const { setStatus, setData } = useSelector((state) => state.cahWiki);
+    return (
+        <div>
+            {setStatus === "succeeded" && setData.setInfo.setName}
+        </div>
+    )
+}
+
+
 
 const GameWikiView = () => {
     const gameName = useParams().game;
-    const {
-        dbStatus, setStatus, setData } = useSelector((state) => state.cahWiki);
+    const dbStatus = useSelector((state) => state.cahWiki).dbStatus;
+    const  user = useSelector((state) => state.auth).user["userRoles"];
     const dispatch = useDispatch();
     useEffect(() => {
         if (dbStatus === 'idle') dispatch(initializeWiki());
@@ -68,9 +78,9 @@ const GameWikiView = () => {
             game wiki {gameName}
             <ExpansionBlock />
             <SetBlock />
-            <div>
-                {setStatus === "succeeded" && setData.setInfo.setName}
-            </div>
+            <SetViewBlock />
+            {console.log(user)}
+            {/* {user.userRoles.includes("USER") && <button>Add</button>} */}
         </div>
     )
 }
