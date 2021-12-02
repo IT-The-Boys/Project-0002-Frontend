@@ -1,9 +1,10 @@
-import CaHView from "views/CahView";
+
+import Router from "./routes/Router";
 
 function App() {
   return (
     <>
-      <CaHView />
+      <Router />
     </>
   );
 }

@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { hideDialog, login } from 'store/auth/authSlice';
 
-const LoginForm = ({ toggle }) => {
-    const {fromURL} = useSelector(state => state.auth)
+const SignInForm = () => {
+    const {toUrl} = useSelector(state => state.auth)
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [form, setForm] = useState({
@@ -26,8 +26,7 @@ const LoginForm = ({ toggle }) => {
         dispatch(login({ username, password }))
             .unwrap()
             .then(() => {
-                console.log("successful")
-                navigate(fromURL)
+                navigate(toUrl)
             })
             .catch(() => {
                 console.log("not successful")
@@ -72,4 +71,4 @@ const LoginForm = ({ toggle }) => {
     )
 }
 
-export default LoginForm
+export default SignInForm

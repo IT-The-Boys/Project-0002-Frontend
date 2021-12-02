@@ -8,8 +8,6 @@ const GameLobbyView = () => {
     const lobbyId=useParams().lobbyId;
     const { lobbyList } = useSelector((state) => state.app);
     const navigate=useNavigate()
-    console.log(lobbyId)
-    console.log(lobbyList)
     useEffect(() => {
         if (lobbyId!=="cah"|| lobbyList.length===0) navigate("/");
     }

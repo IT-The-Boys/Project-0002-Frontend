@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import {  useNavigate, useLocation, Outlet } from 'react-router-dom'
-import { recordFromUrl, showDialog } from 'store/auth/authSlice';
+import { setToUrl, showDialog } from 'store/auth/authSlice';
 
 const PrivateRoute = () => {
     const { isAuthenticated, } = useSelector(state => state.auth);
@@ -10,9 +10,9 @@ const PrivateRoute = () => {
     const location = useLocation();
     useEffect(() => {
         if (!isAuthenticated){
-            navigate("/");
-            dispatch(recordFromUrl(location.pathname));
-            dispatch(showDialog());
+            navigate(-1);
+            dispatch(setToUrl(location.pathname));
+            dispatch(showDialog(false));
         }
 
         

@@ -8,7 +8,7 @@ import { getLobbyList } from '../store/app/appSlice';
 
 
 const GameSelectorView = () => {
-    const { isOpen } = useSelector((state) => state.auth);
+
     const { lobbyList, status } = useSelector((state) => state.app);
     let navigate = useNavigate();
     const dispatch = useDispatch();
@@ -26,7 +26,7 @@ const GameSelectorView = () => {
             {
                 lobbyList.map(lobby => <LobbyCard handleClick={handleClick} lobby={lobby} key={lobby.lobbyId} />)
             }
-            {isOpen && <AuthenticationPopup />}
+            
         </div>
     )
 }

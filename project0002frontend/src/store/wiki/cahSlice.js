@@ -6,21 +6,18 @@ const initialState = {
     expansionList: [],
     activeExpansion: 1,
     activeSet: null,
-    dbStatus: 'idle',
-    setStatus: 'idle',
-    setListStatus: 'idle',
-    expansionStatus: 'idle',
+    dbConnect: 'idle',
     setData:'',
-    error: null
+    error: null,
+    newCards: null
 }
 
 export const getSetList = createAsyncThunk(
     "wiki/setList",
     async (_, { getState }) => {
         try {
-            const { expansionList, activeExpansion } = getState().cahWiki;
-            const exp = expansionList[activeExpansion].name;
-            const response = await cardService.getSetList("CAH", exp);
+            const { activeExpansion } = getState().cahWiki;
+            const response = await cardService.getSetList("CAH", activeExpansion);
             // thunkAPI.dispatch(setMessage(response.data.message));
             return response.data;
         } catch (error) {
@@ -63,16 +60,6 @@ export const getExpansionList = createAsyncThunk(
     }
 );
 
-export const initializeWiki = createAsyncThunk(
-    "wiki/initialize",
-    async (_, thunkAPI) => {
-        await thunkAPI.dispatch(getExpansionList());
-        await thunkAPI.dispatch(getSetList())
-    }
-);
-
-
-
 
 const cahSlice = createSlice({
     name: "cahWiki",
@@ -84,51 +71,41 @@ const cahSlice = createSlice({
             },
         clearSetData: (state)=> {
             state.setData=null;
-            state.setStatus = "idle"
+            state.dbConnect = "idle"
         },
     },
     extraReducers: {
         [getSetList.pending]: (state, action) => {
-            state.setListStatus = "pending";
+            state.dbConnect = "pending";
         },
         [getSetList.fulfilled]: (state, action) => {
-            state.setListStatus = "succeeded";
+            state.dbConnect = "succeeded";
             state.setList = action.payload;
         },
         [getSetList.rejected]: (state, action) => {
-            state.setListStatus = "failed";
-            state.error = action.error;
-        },
-        [initializeWiki.pending]: (state, action) => {
-            state.dbStatus = "pending";
-        },
-        [initializeWiki.fulfilled]: (state, action) => {
-            state.dbStatus = "succeeded";
-        },
-        [initializeWiki.rejected]: (state, action) => {
-            state.dbStatus = "failed";
+            state.dbConnect = "failed";
             state.error = action.error;
         },
         [getExpansionList.pending]: (state, action) => {
-            state.expansionStatus = "pending";
+            state.dbConnect = "pending";
         },
         [getExpansionList.fulfilled]: (state, action) => {
-            state.expansionStatus = "succeeded";
+            state.dbConnect = "succeeded";
             state.expansionList = action.payload;
         },
         [getExpansionList.rejected]: (state, action) => {
-            state.expansionStatus = "failed";
+            state.dbConnect = "failed";
             state.error = action.error;
         },
         [getSet.pending]: (state, action) => {
-            state.setStatus = "pending";
+            state.dbConnect = "pending";
         },
         [getSet.fulfilled]: (state, action) => {
-            state.setStatus = "succeeded";
+            state.dbConnect = "succeeded";
             state.setData = action.payload;
         },
         [getSet.rejected]: (state, action) => {
-            state.setStatus = "failed";
+            state.dbConnect = "failed";
             state.error = action.error;
         }
     },

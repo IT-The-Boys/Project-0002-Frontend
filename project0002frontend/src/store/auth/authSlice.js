@@ -70,13 +70,20 @@ const initialize = () => {
   const user = localStorage.getItem("user")
     ? JSON.parse(localStorage.getItem("user"))
     : null;
-  const refreshToken = _decode(user.refresh_token).exp;
+  if (!user) return {
+    toUrl: "",
+    isOpen: false,
+    registerMode: false,
+    isAuthenticated: false,
+    user: null
+  }
+  const refreshToken = _decode(user.refresh_token)?.exp;
   console.log(refreshToken)
   console.log(Date.now()/1000)
   if (refreshToken<Date.now()/1000) {
     console.log("expired")
     return {
-      fromURL: "",
+      toUrl: "",
       isOpen: false,
       registerMode: false,
       isAuthenticated: false,
@@ -85,7 +92,7 @@ const initialize = () => {
   } else {
     console.log("valid");
     return {
-      fromURL: "",
+      toUrl: "",
       isOpen: false,
       registerMode: false,
       isAuthenticated: true,
@@ -99,8 +106,10 @@ const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    showDialog(state) {
+    showDialog(state,action) {
+      console.log("action", action)
       state.isOpen = true;
+      state.registerMode= action.payload;
     },
     hideDialog(state) {
       state.isOpen = false;
@@ -111,8 +120,8 @@ const authSlice = createSlice({
     switchToLogin(state) {
       state.registerMode = false;
     },
-    recordFromUrl(state, { payload }) {
-      state.fromURL = payload;
+    setToUrl(state, { payload }) {
+      state.toUrl = payload;
     }
   },
   extraReducers: {
@@ -139,7 +148,6 @@ const authSlice = createSlice({
 })
 
 
-export const { recordFromUrl, switchToRegister, switchToLogin, showDialog, hideDialog } = authSlice.actions
-
+export const { setToUrl, switchToRegister, switchToLogin, showDialog, hideDialog } = authSlice.actions
 
 export default authSlice.reducer

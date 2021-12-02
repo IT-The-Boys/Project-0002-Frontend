@@ -15,7 +15,7 @@ const initialState = {
     serverFilter:
     //pass function as argument
     {
-        playerList: list=>list.includes("DA"),
+        playerList:"",
         playerLimit: 0,
         serverHost: {},
         serverName: "",
@@ -23,7 +23,7 @@ const initialState = {
         serverId: 0,
         timeLimit: 60,
         timeRunning: 0,
-        scoreLimit: limit => limit < 5,
+        scoreLimit:"",
         sets: [],
     },
     serverList: [
