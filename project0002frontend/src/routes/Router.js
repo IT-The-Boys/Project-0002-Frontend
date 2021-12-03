@@ -1,12 +1,4 @@
 import React from 'react'
-<<<<<<< HEAD
-
-const Router = () => {
-    return (
-        <div>
-            
-        </div>
-=======
 import {
     BrowserRouter,
     Routes,
@@ -39,7 +31,6 @@ const Router = () => {
                 />
             </Routes>
         </BrowserRouter>
->>>>>>> origin/Router
     )
 }
 

@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createSelector } from "@reduxjs/toolkit";
 
 const initialState = {
     currentQuestion: {
@@ -170,16 +170,16 @@ const initialState = {
         currentRound: 2,
         playerList: [
             {
-                playerSeat: 1,
+                playerSeat: 2,
                 playerName: "DM",
                 playerAnswer: 0,
-                playerScore: 3,
+                playerScore: 5,
                 playerAvatar: ""
             }, {
                 playerSeat: 1,
                 playerName: "Eddie",
                 playerAnswer: 2,
-                playerScore: 6,
+                playerScore: 7,
                 playerAvatar: ""
             }
         ]
@@ -194,11 +194,17 @@ const gameSlice = createSlice({
     name: "cahgame",
     initialState,
     reducers: {
-
+        
     }
 })
 
+export const playerData = createSelector(
+    (state) => state.cahgame,
+    (cahgame) => {
+        let tmp = cahgame.gameTable;
+        return tmp;
+    }
+)
 
-
-export const { } = gameSlice.actions;
+export const {  } = gameSlice.actions;
 export default gameSlice.reducer

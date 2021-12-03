@@ -1,5 +1,5 @@
-
 import React from 'react'
+import GameStatus from './GameStatus'
 
 const GameScreenView = () => {
     return (
@@ -9,8 +9,8 @@ const GameScreenView = () => {
             <div className='gameArea'>
                 {/* <Question />
                 <Answers />
-                <Hand />
-                <GameStatus /> */}
+                <Hand /> */}
+                <GameStatus />
             </div>
         </div>
     )
