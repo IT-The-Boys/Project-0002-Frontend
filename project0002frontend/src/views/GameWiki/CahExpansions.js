@@ -8,7 +8,7 @@ const CahExpansions = () => {
     return (
 
         <div> 
-            {expansionList.map(exp => <Link to={exp.name.toLowerCase()} key={exp.code}>{exp.name}</Link>)}
+            {expansionList.map(exp => <div  key={exp.code}><Link to={exp.name.toLowerCase()}>{exp.name}</Link><br/></div>)}
             <button>Add</button>
         </div>
 

@@ -9,6 +9,7 @@ import { fillObjectWith } from 'utils/ObjectUtils';
 const CahSetInfoView = () => {
     const info = useSelector((state) => state.cahWiki).setData?.setInfo;
     const [editMode, setEditMode] = useState({})
+    const [open, setOpen] = useState(false)
     const [formData, setFormData] = useState({})
     const [modified, setModified] = useState(false)
     const { expansionList } = useSelector((state) => state.cahWiki);
@@ -27,6 +28,9 @@ const CahSetInfoView = () => {
         }))
         setModified(true)
     }
+    const toggleHandler = () => {
+        setOpen(!open)
+    }   
 
     const handleReset = () => {
         if (info) {
@@ -45,34 +49,37 @@ const CahSetInfoView = () => {
     if (info) {
         return (
             <div>
-                <EditTextDiv
-                    title="Name"
-                    mode={editMode.setName}
-                    value={formData.setName ? formData.setName : info.setName}
-                    hasPermission={hasPermission}
-                    onChange={handleChange}
-                    id="setName" />
-                <EditSelectAreaDiv
-                    title="Expansion"
-                    mode={editMode.setExpansion}
-                    value={formData.setExpansion ? formData.setExpansion : info.setExpansion.name}
-                    valueList={expansionList}
-                    hasPermission={hasPermission}
-                    onChange={handleChange}
-                    id="setDescription" />
-                <EditTextAreaDiv
-                    title="Description"
-                    mode={editMode.setDescription}
-                    value={formData.setDescription ? formData.setDescription : info.setDescription}
-                    hasPermission={hasPermission}
-                    onChange={handleChange}
-                    id="setDescription" />
-                {modified && <div>
-                    <button onClick={handleReset}>Reset</button>
-                    <button onClick={handleSave}>Save changes</button>
-                </div>
-                }
+                Set info <button onClick={toggleHandler}>Show</button>
+                {open && <div>
+                    <EditTextDiv
+                        title="Name"
+                        mode={editMode.setName}
+                        value={formData.setName ? formData.setName : info.setName}
+                        hasPermission={hasPermission}
+                        onChange={handleChange}
+                        id="setName" />
+                    <EditSelectAreaDiv
+                        title="Expansion"
+                        mode={editMode.setExpansion}
+                        value={formData.setExpansion ? formData.setExpansion : info.setExpansion.name}
+                        valueList={expansionList}
+                        hasPermission={hasPermission}
+                        onChange={handleChange}
+                        id="setDescription" />
+                    <EditTextAreaDiv
+                        title="Description"
+                        mode={editMode.setDescription}
+                        value={formData.setDescription ? formData.setDescription : info.setDescription}
+                        hasPermission={hasPermission}
+                        onChange={handleChange}
+                        id="setDescription" />
+                    {modified && <div>
+                        <button onClick={handleReset}>Reset</button>
+                        <button onClick={handleSave}>Save changes</button>
+                    </div>
+                    }
 
+                </div>}
             </div>
         )
     } else return <></>
