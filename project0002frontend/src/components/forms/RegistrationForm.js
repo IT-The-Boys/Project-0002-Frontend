@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { register } from 'store/auth/authSlice';
+import { AUTH_MODE_SIGNUP } from 'utils/constants/config';
 
 const RegistrationForm = () => {
     const [successful, setSuccessful] = useState(false);
+    const { authMode } = useSelector(state => state.app)
     const dispatch = useDispatch();
     const [form, setForm] = useState({
         email: "",
@@ -22,9 +24,9 @@ const RegistrationForm = () => {
         e.preventDefault();
         setSuccessful(false);
         if (form.password === form.confirmPassword) {
-            const {email, username,password} = form
+            const { email, username, password } = form
             // sendDetailsToServer()    
-            dispatch(register({email, username, password}))
+            dispatch(register({ email, username, password }))
                 .unwrap()
                 .then(() => {
                     setSuccessful(true);
@@ -42,7 +44,7 @@ const RegistrationForm = () => {
     }
 
     return (
-        <div>
+        <> {authMode === AUTH_MODE_SIGNUP ? (
             <form>
                 <div className="form-group">
                     <label htmlFor="email">Email address</label>
@@ -95,7 +97,8 @@ const RegistrationForm = () => {
                     Register
                 </button>
             </form>
-        </div>
+        ) : null}
+        </>
 
     )
 }

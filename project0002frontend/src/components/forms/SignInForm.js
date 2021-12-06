@@ -1,10 +1,13 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { hidePopup } from 'store/app/appSlice';
 import { hideDialog, login } from 'store/auth/authSlice';
+import { AUTH_MODE_SIGNIN } from 'utils/constants/config';
 
 const SignInForm = () => {
     const {toUrl} = useSelector(state => state.auth)
+    const {authMode} = useSelector(state => state.app)
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [form, setForm] = useState({
@@ -26,6 +29,7 @@ const SignInForm = () => {
         dispatch(login({ username, password }))
             .unwrap()
             .then(() => {
+                dispatch(hidePopup("authPopup"))
                 navigate(toUrl)
             })
             .catch(() => {
@@ -34,9 +38,8 @@ const SignInForm = () => {
 
     }
     return (
-        <div>
+        <> {authMode===AUTH_MODE_SIGNIN ? (
             <form>
-
                 <div className="form-group">
                     <label htmlFor="username">Username</label>
                     <input type="text"
@@ -66,8 +69,9 @@ const SignInForm = () => {
                     Login
                 </button>
             </form>
-            <button onClick={()=>dispatch(hideDialog())}>close</button>
-        </div>
+        ):null
+        }
+        </>
     )
 }
 

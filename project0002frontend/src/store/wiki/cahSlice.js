@@ -9,7 +9,7 @@ const initialState = {
     dbConnect: 'idle',
     setData:'',
     error: null,
-    newCards: null
+    newCardList: []
 }
 
 export const getSetList = createAsyncThunk(
@@ -61,6 +61,7 @@ export const getExpansionList = createAsyncThunk(
 );
 
 
+
 const cahSlice = createSlice({
     name: "cahWiki",
     initialState,
@@ -73,6 +74,15 @@ const cahSlice = createSlice({
             state.setData=null;
             state.dbConnect = "idle"
         },
+        addCard:(state, {payload})=>{
+            console.log(payload)
+            Array.isArray(payload)?
+            state.newCardList=state.newCardList.concat(payload):
+            state.newCardList.push(payload)
+        },
+        deleteCard:(state, {payload})=>{
+            state.newCardList.splice(payload)
+        }
     },
     extraReducers: {
         [getSetList.pending]: (state, action) => {
@@ -112,7 +122,7 @@ const cahSlice = createSlice({
 })
 
 
-export const { setActiveExpansion, setActiveSet, clearSetData } = cahSlice.actions
+export const { setActiveExpansion, setActiveSet, clearSetData, addCard, deleteCard} = cahSlice.actions
 
 
 export default cahSlice.reducer

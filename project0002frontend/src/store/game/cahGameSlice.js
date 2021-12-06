@@ -194,7 +194,7 @@ const gameSlice = createSlice({
     name: "cahgame",
     initialState,
     reducers: {
-
+        
     }
 })
 

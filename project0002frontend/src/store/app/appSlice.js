@@ -18,15 +18,61 @@ export const getLobbyList = createAsyncThunk(
 );
 
 
+const themeList = {
+    defaultTheme:{
+        name:"defaultTheme",
+        colors: {
+            header: '#ebfbff',
+            body: 'red',
+            footer: '#003333',
+        },
+        mobile: '768px',
+
+    },
+    cahTheme: {
+        name:"cahTheme",
+        colors: {
+            header: '#ebfbff',
+            body: 'fff',
+            footer: '#003333',
+        },
+        mobile: '768px',
+    }
+
+}
+
+
 const initialState = {
     lobbyList: [],
     status: 'idle',
-    error: null
+    error: null,
+    authPopup: false,
+    authMode: "signIn",
+    chatController: false,
+    currentTheme: themeList.defaultTheme,
 }
 
 const appSlice = createSlice({
     name: "app",
     initialState,
+    reducers: {
+        togglePopup: (state, { payload }) => {
+            state[payload] = !state[payload];
+        },
+        showPopup: (state, { payload }) => {
+            state[payload] = true;
+        },
+        hidePopup: (state, { payload }) => {
+            state[payload] = false;
+        },
+        setMode: (state, { payload }) => {
+            state[payload[0]] = payload[1];
+        },
+        setTheme: (state, { payload }) => {
+            state.currentTheme=themeList[payload];
+
+        }
+    },
     extraReducers: {
         [getLobbyList.pending]: (state, action) => {
             state.status = "pending";
@@ -41,5 +87,7 @@ const appSlice = createSlice({
         }
     },
 })
+
+export const { showPopup, hidePopup, togglePopup, setMode, setTheme} = appSlice.actions
 
 export default appSlice.reducer

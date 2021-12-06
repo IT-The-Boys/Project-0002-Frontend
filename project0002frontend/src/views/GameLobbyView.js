@@ -2,16 +2,19 @@ import React, { useEffect } from 'react'
 import ServerList from 'components/serverlist'
 import GameFilterForm from 'components/forms/GameFilterForm'
 import { useNavigate, useParams } from 'react-router'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { setTheme } from 'store/app/appSlice'
 
 const GameLobbyView = () => {
-    const lobbyId=useParams().lobbyId;
-    const { lobbyList } = useSelector((state) => state.app);
-    const navigate=useNavigate()
+    const lobbyId = useParams().lobbyId;
+    const { lobbyList, currentTheme } = useSelector((state) => state.app);
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
     useEffect(() => {
-        if (lobbyId!=="cah"|| lobbyList.length===0) navigate("/");
+        if (lobbyId !== "cah" || lobbyList.length === 0) navigate("/");
+        if (currentTheme.name !== "defaultTheme") dispatch(setTheme("defaultTheme"))
     }
-        ,[lobbyId, navigate, lobbyList])
+        , [lobbyId, navigate, lobbyList])
     return (
         <div>
             <h1>{lobbyId}</h1>

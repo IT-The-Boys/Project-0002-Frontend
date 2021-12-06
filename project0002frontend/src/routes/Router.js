@@ -1,4 +1,5 @@
-import React from 'react'
+import Chat from 'components/chat/Chat';
+import React, { useState } from 'react'
 import { useSelector } from 'react-redux';
 import {
     BrowserRouter,
@@ -20,32 +21,37 @@ import CahWiki from '../views/GameWiki/CahWiki';
 import PrivateRoute from './PrivateRoute';
 
 const AppController = () => {
-    const { isOpen, isAuthenticated } = useSelector(state => state.auth)
+    const { isAuthenticated } = useSelector(state => state.auth)
+    const [chatOpen, setChatOpen] = useState(false)
     return (
         <div>Navbar
-        {isAuthenticated ? <SignOutBtn /> : <><SignInBtn/><SignUpBtn/></>}
-        <div>Links</div>
-        <Link to="lobby/cah">Game Lobby</Link>
-        <Link to="wiki/cah">Game Wiki</Link>
-        {isOpen && <AuthenticationPopup/>}
+            {isAuthenticated ? <SignOutBtn /> : <><SignInBtn /><SignUpBtn /></>}
+            <div>Links</div>
+            <Link to="lobby/cah">Game Lobby</Link>
+            <Link to="wiki/cah">Game Wiki</Link>
+            <button onClick={() => setChatOpen(!chatOpen)}>Chat</button>
+
+            {chatOpen && <Chat />}
         </div>
-        
+
     )
 }
 
 const Router = () => {
     return (
         <BrowserRouter>
+            <AuthenticationPopup />
             <AppController />
             <Routes>
                 <Route path="/" element={<GameSelectorView />} />
+
                 <Route path="/lobby/:lobbyId" element={<PrivateRoute />} >
                     <Route path="/lobby/:lobbyId" element={<GameLobbyView />} />
                 </Route>
                 <Route path="/wiki" element={<GameWikiView />}>
                     <Route path="cah" element={<CahWiki />}>
-                        <Route path=":expansion" element={<CahSetList/>}>
-                            <Route path=":setId" element={<CahSetView/>} />
+                        <Route path=":expansion" element={<CahSetList />}>
+                            <Route path=":setId" element={<CahSetView />} />
                         </Route>
                         {/* <Route path=":expansion/:setId/edit" element={<CahSetEditView/>} /> */}
                     </Route>
