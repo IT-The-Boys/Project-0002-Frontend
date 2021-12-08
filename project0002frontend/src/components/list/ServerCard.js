@@ -1,14 +1,17 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
-const ServerCard = (props) => {
+const ServerCard = ({server}) => {
+    console.log(server)
     return (
         <div><fieldset>
-            <h2>{props.servername}</h2> 
-            This game is {props.serverstatus}
-            score limit: {props.scorelimit}<br />
-            <p>card sets: {props.sets}</p>
-            <p>time limit: {props.timelimit}</p>
-            <button type="submit" >Join Game</button>
+            <h2>{server.serverName}</h2> 
+            This game is {server.serverStatus}
+            score limit: {server.scoreLimit}<br />
+            <p>card sets: {server.sets}</p>
+            <p>time limit: {server.timeLimit}</p>
+            {/* <button type="submit" >Join Game</button> */}
+            <Link to={"/game/" + server.serverId}>Join Game</Link>
         </fieldset></div>
     )
 }

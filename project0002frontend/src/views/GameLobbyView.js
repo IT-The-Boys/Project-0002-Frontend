@@ -17,10 +17,11 @@ const GameLobbyView = () => {
     const navigate=useNavigate()
     console.log(lobbyId)
     console.log(lobbyList)
-    useEffect(() => {
-        if (lobbyId!=="cah"|| lobbyList.length===0) navigate("/");
-    }
-        ,[lobbyId, navigate, lobbyList])
+    // 本番はコメントアウト消す
+    // useEffect(() => {
+    //     if (lobbyId!=="cah"|| lobbyList.length===0) navigate("/");
+    // }
+    //    ,[lobbyId, navigate, lobbyList])
     return (
         <div>
             <h1>{lobbyId}</h1>

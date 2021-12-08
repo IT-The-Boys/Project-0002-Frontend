@@ -5,7 +5,7 @@ import { setFilter } from 'store/lobby/lobbySlice'
 const GameFilterForm = () => {
     const [host, setHost] = useState("")
     const [server, setServer] = useState("")
-    const [score, setScore] = useState(5)
+    const [score, setScore] = useState(10)
     const [time, setTime] = useState(120)
     const tmp = useSelector(state => state.lobby.serverFilter)
     const state = useSelector((state) => state)

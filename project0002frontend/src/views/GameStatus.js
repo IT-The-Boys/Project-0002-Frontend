@@ -2,7 +2,7 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 
 const GameStatus = (props) => {
-  let playerStatus = useSelector(state=>state.cahgame.gameTable)
+  let playerStatus = useSelector(state=>state.cahGame.gameTable)
   let dealer = playerStatus.currentDealer
   let round = playerStatus.currentRound
   let players = playerStatus.playerList
