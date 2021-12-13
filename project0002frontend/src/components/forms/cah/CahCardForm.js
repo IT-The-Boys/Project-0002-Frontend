@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
-import { useDispatch } from 'react-redux'
-import { addCard } from 'store/wiki/cahSlice';
+import { useDispatch, useSelector } from 'react-redux'
+import { addCard } from 'store/database/cahSlice';
+import { hidePopup } from 'store/ui/modalSlice';
 import { checkQuestion } from 'utils/CahCameUtils';
 import { deleteAttributesWithValue } from 'utils/ObjectUtils';
 
@@ -20,8 +21,9 @@ const ValidatedInput = (props) => {
     );
 }
 
-const CahCardForm = ({ toggleHandler }) => {
+const CahCardForm = () => {
     const dispatch = useDispatch();
+    const { addCardPopup } = useSelector(state => state.modal)
     const defaultForm = {
         cardType: "ANSWER",
         cardText: "",
@@ -51,22 +53,25 @@ const CahCardForm = ({ toggleHandler }) => {
         e.preventDefault();
         let cleanedData = deleteAttributesWithValue(formData, [null, undefined], true)
         //ToDo add form validation
-        if (formData.cardType === "QUESTION")
-            switch (checkQuestion(formData.cardText)) {
-                case 0: console.log("error"); break;
-                case 1: {
-                    console.log("as planned");
-                    dispatch(addCard(cleanedData))
-                    toggleHandler();
-                    break;
-                }
-                default: console.log("need to check card actions")
-            }
-        else {
-            dispatch(addCard(cleanedData))
-            toggleHandler();
-        }
-        
+        // if (formData.cardType === "QUESTION")
+        //     switch (checkQuestion(formData.cardText)) {
+        //         case 0: console.log("error"); break;
+        //         case 1: {
+        //             console.log("as planned");
+        //             dispatch(addCard(cleanedData))
+        //             dispatch(hidePopup("addCardPopup"));
+        //             break;
+        //         }
+        //         default: console.log("need to check card actions")
+        //     }
+        // else {
+        //     dispatch(addCard(cleanedData))
+        //     dispatch(hidePopup("addCardPopup"));
+        // }
+        dispatch(addCard(cleanedData))
+        setFormData(defaultForm);
+        dispatch(hidePopup("addCardPopup"));
+
 
     }
     const changeHandler = (e) => {
@@ -87,46 +92,51 @@ const CahCardForm = ({ toggleHandler }) => {
     }
 
     return (
-        <form onSubmit={submitHandler}>
-            <h1>Add card</h1>
-            card type
-            <select
-                id="cardType"
-                value={formData.cardType}
-                onChange={changeHandler}>
-                <option value="ANSWER">white</option>
-                <option value="QUESTION">black</option>
-            </select>
-            {formData.cardType === "QUESTION" && <div>has actions <input type="checkbox" onChange={() => setHasActions(!hasActions)} /></div>}
-            {hasActions &&
-                <div id="cardActions"> Actions
-                    Pick <input type="text" placeholder="" id="pick"
-                        value={formData.cardActions.pick ? formData.cardActions.pick : ""}
-                        onChange={changeHandler} />
-                    Draw <input type="text" placeholder="" id="draw"
-                        value={formData.cardActions.draw ? formData.cardActions.draw : ""}
-                        onChange={changeHandler} />
-                </div>}
-            <br />
+        <>
+            {addCardPopup ? (
+                <form onSubmit={submitHandler}>
+                    <h1>Add card</h1>
+                    card type
+                    <select
+                        id="cardType"
+                        value={formData.cardType}
+                        onChange={changeHandler}>
+                        <option value="ANSWER">white</option>
+                        <option value="QUESTION">black</option>
+                    </select>
+                    {formData.cardType === "QUESTION" && <div>has actions <input type="checkbox" onChange={() => setHasActions(!hasActions)} /></div>}
+                    {hasActions &&
+                        <div id="cardActions"> Actions
+                            Pick <input type="text" placeholder="" id="pick"
+                                value={formData.cardActions.pick ? formData.cardActions.pick : ""}
+                                onChange={changeHandler} />
+                            Draw <input type="text" placeholder="" id="draw"
+                                value={formData.cardActions.draw ? formData.cardActions.draw : ""}
+                                onChange={changeHandler} />
+                        </div>}
+                    <br />
 
-            {formFields.map((field) => (
-                <ValidatedInput
-                    key={field.id}
-                    {...field}
-                    value={formData[field.id]}
-                    onChange={changeHandler}
-                />
-            ))}
+                    {formFields.map((field) => (
+                        <ValidatedInput
+                            key={field.id}
+                            {...field}
+                            value={formData[field.id]}
+                            onChange={changeHandler}
+                        />
+                    ))}
 
-            <button type="submit" disabled={formData.cardText ? false : true}>add</button>
-            {edited && <button onClick={() => {
-                setFormData(defaultForm)
-                setHasActions(false)
-                setEdited(false)
-            }}>reset</button>}
+                    <button type="submit" disabled={formData.cardText ? false : true}>add</button>
+                    {edited && <button onClick={() => {
+                        setFormData(defaultForm)
+                        setHasActions(false)
+                        setEdited(false)
+                    }}>reset</button>}
 
-            <button onClick={toggleHandler}>close</button>
-        </form>
+                    <button onClick={() => dispatch(hidePopup("addCardPopup"))}>close</button>
+                </form>
+            ) : null
+            }
+        </>
     )
 }
 

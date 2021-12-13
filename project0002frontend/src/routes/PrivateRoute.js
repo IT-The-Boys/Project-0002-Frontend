@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import {  useNavigate, useLocation, Outlet } from 'react-router-dom'
-import { showPopup } from 'store/app/appSlice';
+import { showPopup } from 'store/ui/modalSlice';
 import { setToUrl } from 'store/auth/authSlice';
 
 const PrivateRoute = () => {

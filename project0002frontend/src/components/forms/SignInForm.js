@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { hidePopup } from 'store/app/appSlice';
+import { hidePopup } from 'store/ui/modalSlice';
 import { hideDialog, login } from 'store/auth/authSlice';
 import { AUTH_MODE_SIGNIN } from 'utils/constants/config';
 
 const SignInForm = () => {
     const {toUrl} = useSelector(state => state.auth)
-    const {authMode} = useSelector(state => state.app)
+    const {authMode} = useSelector(state => state.modal)
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [form, setForm] = useState({

@@ -1,15 +1,27 @@
 import { createGlobalStyle } from 'styled-components'
+import CahFont from 'assets/fonts/CahFont.woff2'
+import BlackOpsOne from 'assets/fonts/black-ops-one-v12-latin-regular.woff2'
 
 const GlobalStyles = createGlobalStyle`
+    @font-face {
+      font-family: 'Helvetica Neue LT Pro';
+      src: url(${CahFont}) format('woff2')
+    }
+    @font-face {
+      font-family: 'Black Ops One';
+      src:url(${BlackOpsOne}) format('woff2')
+    }
+
   * {
     box-sizing: border-box;
   }
-  body {
+  html,body,#root {
     background: ${({ theme }) => theme.colors.body};
-    /* color: hsl(192, 100%, 9%);
-    font-family: 'Poppins', sans-serif;
-    font-size: 1.15em; */
+    width:100%;
+    height:100%;
+    font-family:  ${({ theme }) => theme.fontFamily};
     margin: 0;
+    overflow: hidden;
     transition: all 0.5s linear;
   }
 `

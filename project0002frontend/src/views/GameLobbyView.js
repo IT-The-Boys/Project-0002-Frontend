@@ -14,7 +14,7 @@ const GameLobbyView = () => {
         if (lobbyId !== "cah" || lobbyList.length === 0) navigate("/");
         if (currentTheme.name !== "defaultTheme") dispatch(setTheme("defaultTheme"))
     }
-        , [lobbyId, navigate, lobbyList])
+        , [lobbyId, navigate, lobbyList, currentTheme.name, dispatch])
     return (
         <div>
             <h1>{lobbyId}</h1>

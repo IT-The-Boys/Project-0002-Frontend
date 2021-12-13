@@ -1,18 +1,34 @@
-import React from 'react'
-import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+// import { StyledCarousel, StyledCarouselBG, StyledCarouselCard, StyledCarouselCardTitle, StyledCarouselLink} from 'components/styles/div/CahExpansions.styled';
+// import React from 'react'
+// import { useSelector } from 'react-redux';
+// import { Link } from 'react-router-dom';
 
+// const ExpansionCard = ({ expansion }) => {
+//     return (
+//         <StyledCarouselCard>
 
-const CahExpansions = () => {
-    const { expansionList } = useSelector((state) => state.cahWiki);
-    return (
+//             <Link to={expansion.name.toLowerCase()}>
+//                 <StyledCarouselCardTitle>
+//                     {expansion.title}
+//                 </StyledCarouselCardTitle>
+//             </Link>
 
-        <div> 
-            {expansionList.map(exp => <div  key={exp.code}><Link to={exp.name.toLowerCase()}>{exp.name}</Link><br/></div>)}
-            <button>Add</button>
-        </div>
+//         </StyledCarouselCard>
+//     )
 
-    )
-}
+// }
 
-export default CahExpansions
+// const CahExpansions = () => {
+//     const { expansionList } = useSelector((state) => state.cahWiki);
+//     return (
+//         <StyledCarouselBG>
+//             {expansionList.length > 0 ?
+//                 <StyledCarousel>
+//                     {expansionList.map(exp => <Link to={exp.name.toLowerCase()}>{exp.title}</Link>)}
+//                 </StyledCarousel> : null
+//             }
+//         </StyledCarouselBG>
+//     )
+// }
+
+// export default CahExpansions

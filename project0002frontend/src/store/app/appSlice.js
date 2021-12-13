@@ -21,8 +21,10 @@ export const getLobbyList = createAsyncThunk(
 const themeList = {
     defaultTheme:{
         name:"defaultTheme",
+        fontFamily: "'Poppins'",
         colors: {
-            header: '#ebfbff',
+            headerBG: '#ebfbff',
+            headerText: '#000',
             body: 'red',
             footer: '#003333',
         },
@@ -31,12 +33,24 @@ const themeList = {
     },
     cahTheme: {
         name:"cahTheme",
+        fontFamily:"'Helvetica Neue LT Pro'",
         colors: {
-            header: '#ebfbff',
-            body: 'fff',
+            headerBG: '#100e17',
+            headerText: '#fff',
+            body: '#fff',
             footer: '#003333',
         },
         mobile: '768px',
+        card:{
+            black:{
+                cardBG: '#000',
+                cardText:'#fff'
+            },
+            white:{
+                cardBG: '#fff',
+                cardText:'#000'
+            }
+        }
     }
 
 }
@@ -46,48 +60,32 @@ const initialState = {
     lobbyList: [],
     status: 'idle',
     error: null,
-    authPopup: false,
-    authMode: "signIn",
-    chatController: false,
-    currentTheme: themeList.defaultTheme,
+    currentTheme: themeList.cahTheme,
 }
 
 const appSlice = createSlice({
     name: "app",
     initialState,
     reducers: {
-        togglePopup: (state, { payload }) => {
-            state[payload] = !state[payload];
-        },
-        showPopup: (state, { payload }) => {
-            state[payload] = true;
-        },
-        hidePopup: (state, { payload }) => {
-            state[payload] = false;
-        },
-        setMode: (state, { payload }) => {
-            state[payload[0]] = payload[1];
-        },
         setTheme: (state, { payload }) => {
             state.currentTheme=themeList[payload];
-
         }
     },
     extraReducers: {
-        [getLobbyList.pending]: (state, action) => {
+        [getLobbyList.pending]: (state) => {
             state.status = "pending";
         },
-        [getLobbyList.fulfilled]: (state, action) => {
+        [getLobbyList.fulfilled]: (state, {payload}) => {
             state.status = "succeeded";
-            state.lobbyList = action.payload;
+            state.lobbyList = payload;
         },
-        [getLobbyList.rejected]: (state, action) => {
+        [getLobbyList.rejected]: (state, payload) => {
             state.status = "failed";
-            state.error = action.error;
+            state.error = payload;
         }
     },
 })
 
-export const { showPopup, hidePopup, togglePopup, setMode, setTheme} = appSlice.actions
+export const { setTheme} = appSlice.actions
 
 export default appSlice.reducer

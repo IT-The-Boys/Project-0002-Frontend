@@ -1,35 +1,20 @@
 import ChatModal from 'components/modals/ChatModal'
-import React, { useEffect, useRef } from 'react'
-// import SockJsClient from 'react-stomp';
+import React, { useEffect} from 'react'
 import ChatRoomList from './ChatRoomList'
 import ChatWindow from './ChatWindow'
 import { useDispatch, useSelector } from 'react-redux';
-// import { onConnect, onDisconnect, onMessage } from 'store/chat/chatSlice';
-// import { CHAT_SERVICE_URL } from '../../utils/constants/config';
-import { connectToChat, sendToChat } from '../../store/chat/chatSlice';
+import { connectToChat } from 'store/chat/chatSlice';
+import { CHAT_MODE_FULL, CHAT_MODE_MIN, CHAT_MODE_ROOM, CHAT_MODE_WINDOW } from 'utils/constants/config';
+import ChatActionBtn from 'components/buttons/ChatActionBtn';
 
 
 
 const Chat = () => {
-    const {chatStatus} = useSelector(state=>state.chat)
+    const { chatStatus } = useSelector(state => state.chat)
+    const { chatMode } = useSelector(state => state.app)
     const dispatch = useDispatch();
-    let clientRef=useRef(null)
-    const sendMessage = ()=>{
-        clientRef.sendMessage("/api/v1/ws/chat/monitor",JSON.stringify({
-            roomId:"monitor",
-            from:"me",
-            to:"",
-            content:"hello",}))
-    }
-    const sendMessageService = ()=>{
-        dispatch(sendToChat({
-            roomId:"monitor",
-            from:"me",
-            to:"",
-            content:"hello",}));
-    }
     useEffect(() => {
-        if (chatStatus!=="online"){
+        if (chatStatus !== "online") {
             console.log("offline")
             dispatch(connectToChat())
         } else {
@@ -37,24 +22,21 @@ const Chat = () => {
         }
 
     }, [chatStatus, dispatch])
-    return (
-        <ChatModal>
-            {/* <SockJsClient
-                url={CHAT_SERVICE_URL}
-                // headers={header}
-                ref={client => clientRef = client}
-                topics={['/chat/monitor']}
-                onConnect={() => 
-                        dispatch(onConnect())}
-                onDisconnect={() => dispatch(onDisconnect())}
-                onMessage={msg =>dispatch(onMessage(msg))}
-                debug={false}
-            /> */}
-            <ChatRoomList />
-            <ChatWindow />
-            <button onClick={()=>sendMessageService()}> click </button>
-        </ChatModal>
-    )
+    switch (chatMode) {
+        case CHAT_MODE_MIN:
+            return <ChatActionBtn />
+        case CHAT_MODE_ROOM:
+        case CHAT_MODE_WINDOW:
+        case CHAT_MODE_FULL:
+            return (
+                <ChatModal>
+                    <ChatRoomList />
+                    <ChatWindow />
+                </ChatModal>
+            )
+        default: return null
+    }
+
 }
 
 export default Chat

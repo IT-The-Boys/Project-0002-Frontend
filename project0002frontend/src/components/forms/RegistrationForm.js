@@ -5,7 +5,7 @@ import { AUTH_MODE_SIGNUP } from 'utils/constants/config';
 
 const RegistrationForm = () => {
     const [successful, setSuccessful] = useState(false);
-    const { authMode } = useSelector(state => state.app)
+    const { authMode } = useSelector(state => state.modal)
     const dispatch = useDispatch();
     const [form, setForm] = useState({
         email: "",

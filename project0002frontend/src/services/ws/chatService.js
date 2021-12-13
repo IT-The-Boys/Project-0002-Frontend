@@ -28,7 +28,7 @@ const _subscribe = (topic) => {
     if (!_subscriptions.has(topic)) {
         console.log("subscribe")
         let sub = _client.subscribe(topic, (msg) => {
-            console.log(msg)
+            console.log("receved", msg)
         })
         _subscriptions.set(topic, sub)
     }
@@ -73,7 +73,6 @@ const startChat = (callback) => {
 const sendTo = (msg) => {
     if (_isConnected) {
         let room="/api/v1/ws/chat/monitor";
-        console.log(JSON.stringify(msg));
         _client.send(room, {}, JSON.stringify(msg));  
     } else {
         console.log("error")

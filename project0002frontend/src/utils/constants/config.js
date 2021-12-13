@@ -4,6 +4,13 @@ export const AUTH_URL = API_URL+'user/';
 export const LOBBY_URL = API_URL+'lobby/';
 
 export const CHAT_SERVICE_URL = API_URL+'ws/chat/';
-
+// authentication window mode 
 export const AUTH_MODE_SIGNUP ="signUp"
 export const AUTH_MODE_SIGNIN ="signIn"
+
+// auth chat window mode 
+export const CHAT_MODE_MIN =0
+export const CHAT_MODE_ROOM =1
+export const CHAT_MODE_WINDOW =2
+export const CHAT_MODE_FULL =3
+
