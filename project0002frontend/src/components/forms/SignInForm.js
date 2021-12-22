@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { hidePopup } from 'store/ui/modalSlice';
-import { hideDialog, login } from 'store/auth/authSlice';
+import { login } from 'store/auth/authSlice';
 import { AUTH_MODE_SIGNIN } from 'utils/constants/config';
 
 const SignInForm = () => {

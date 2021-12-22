@@ -1,12 +1,11 @@
 import React, { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { addCard } from 'store/database/cahSlice';
 import { hidePopup } from 'store/ui/modalSlice';
 import { deleteAttributesWithValue } from 'utils/ObjectUtils';
 
 const CahCardListForm = () => {
     const dispatch = useDispatch()
-    const { addCardBulkPopup } = useSelector(state => state.modal)
     const [formData, setFormData] = useState("");
     const changeHandler = (e) => {
         const rawInput = e.target.value;

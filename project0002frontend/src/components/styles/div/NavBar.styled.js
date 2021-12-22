@@ -2,9 +2,16 @@ import styled from 'styled-components'
 
 export const StyledHeader = styled.header`
   background-color: ${({ theme }) => theme.colors.headerBG};
-  color: ${({ theme }) => theme.colors.headerText};;
+  color: ${({ theme }) => theme.colors.headerText};
+  width:15%;
+  float:left;
   height: 10vh;
   padding: 10px 0;
+  overflow: hidden;
+  /* &:hover{
+    width:100%;
+    transition: 0.4s ease-in;
+  } */
 `
 
 // export const Nav = styled.nav`

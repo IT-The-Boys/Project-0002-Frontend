@@ -1,10 +1,9 @@
 
-import AuthenticationPopup from 'components/popup/AuthenticationPopup';
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from 'react-router';
-import LobbyCard from '../components/layout/LobbyCard';
-import { getLobbyList } from '../store/app/appSlice';
+import LobbyCard from 'components/layout/LobbyCard';
+import { getLobbyList } from 'store/app/appSlice';
 
 
 const GameSelectorView = () => {

@@ -3,7 +3,6 @@ import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router';
 import { getSet, setActiveSet } from 'store/database/cahSlice';
 import CahSetCardListView from './CahSetCardListView';
-import CahSetInfoView from './CahSetInfoView';
 
 const CahSetView = () => {
     const id = useParams().setId;

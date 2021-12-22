@@ -22,7 +22,10 @@ const GlobalStyles = createGlobalStyle`
     font-family:  ${({ theme }) => theme.fontFamily};
     margin: 0;
     overflow: hidden;
-    transition: all 0.5s linear;
+  }
+
+  #root{
+    background-color: #100e17;
   }
 `
 

@@ -1,61 +1,35 @@
-import { StyledCarousel, StyledCarouselBG, StyledCarouselCard, StyledCarouselCardTitle } from 'components/styles/div/CahCarousel.styled';
+import { StyledScrollable, StyledScrollableBG, StyledScrollableCard } from 'components/styles/div/Scrollable.styled';
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Outlet, useNavigate, useParams } from 'react-router';
-import { Link } from 'react-router-dom';
 import { clearSetData, getSetList, setActiveExpansion } from 'store/database/cahSlice';
 
-// const CahSetCard = ({ set }) => {
-//     return (
-//         <StyledCarouselCard>
-//             <Link to={set?.id || "null"}>
-//                 <StyledCarouselCardTitle>
-//                     {set?.setName}
-//                 </StyledCarouselCardTitle>
-//             </Link>
-//         </StyledCarouselCard>
-//     )
-// }
 
 
 const CahSetList = () => {
-    const eN = useParams().expansion;
     const sI = useParams().setId;
+    const eN = useParams().expansion;
     const {
-        setList, expansionList } = useSelector((state) => state.cahWiki);
+        setList, expansionList} = useSelector((state) => state.cahWiki);
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const handleSetSelect = (e) => {
-        e.preventDefault();
-        navigate(e.target.value)
-    }
     useEffect(() => {
-        if (eN) {
-            dispatch(setActiveExpansion(eN.toUpperCase()))
-            dispatch(clearSetData());
-            dispatch(getSetList());
-            if (sI) navigate(sI);
-        } else {
-            expansionList.length>0 && navigate(expansionList[1].name.toLowerCase())
-        }
-    }, [dispatch, eN, navigate, sI, expansionList])
+        const eI = expansionList.findIndex(e => e.name === eN?.toUpperCase())
+        if (eI !== -1) dispatch(setActiveExpansion(eI));
+        dispatch(clearSetData());
+        dispatch(getSetList());
+        if (sI) navigate(sI);
+    }, [dispatch, eN, expansionList, navigate, sI])
     return (
-    <>
-        {/* <StyledCarouselBG> */}
-            {console.log("render wiki nav")}
-            <h1>{setList[0]?.setExpansion.title}</h1>
-        {/* <StyledCarousel>
-            <CahSetCard /><CahSetCard />
-        </StyledCarousel> */}
-            {<select onChange={handleSetSelect} value={sI ? sI : "ph"}>
-                {!sI && <option value="ph">Select set</option>}
-                {setList?.map((set, i) =>
-                    <option key={i} value={set.id}>{set.setName}</option>
-                )}
-            </select>}
-            {/* 
-            <Outlet /> */}
-        {/* </StyledCarouselBG> */}
+        <>
+            <StyledScrollableBG>
+                <StyledScrollable>
+                    {setList?.map((set, index) =>
+                        <StyledScrollableCard key={index} data-title={set.setName}>{set.setName}</StyledScrollableCard>
+                    )}
+                </StyledScrollable>
+            </StyledScrollableBG>
+            <Outlet />
         </>
 
     )

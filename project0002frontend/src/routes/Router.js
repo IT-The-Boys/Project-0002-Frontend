@@ -1,12 +1,9 @@
-import Chat from 'components/chat/Chat';
 import NavBar from 'components/nav/NavBar';
-import React, { useState } from 'react'
-import { useSelector } from 'react-redux';
+import React from 'react'
 import {
     BrowserRouter,
     Routes,
     Route,
-    Link,
 } from "react-router-dom";
 import GameLobbyView from 'views/GameLobbyView'
 import GameScreenView from 'views/GameScreenView'
@@ -27,17 +24,18 @@ const Router = () => {
             <AuthenticationPopup />
             {/* <Chat /> */}
             <Routes>
-               
+
                 <Route path="/" element={<GameSelectorView />} />
 
                 <Route path="/lobby/:lobbyId" element={<PrivateRoute />} >
                     <Route path="/lobby/:lobbyId" element={<GameLobbyView />} />
                 </Route>
                 <Route path="/wiki" element={<GameWikiView />}>
-                    <Route path="cah/" element={<CahWiki />} />
-                    <Route path="cah/:expansion" element={<CahWiki />}>
-                        <Route path=":setId" element={<CahSetView />} />
-                        {/* <Route path=":expansion/:setId/edit" element={<CahSetEditView/>} /> */}
+                    <Route path="cah" element={<CahWiki />}>
+                        <Route path=":expansion" element={<CahSetList />}>
+                            <Route path=":setId" element={<CahSetView />} />
+                            {/* <Route path=":expansion/:setId/edit" element={<CahSetEditView/>} /> */}
+                        </Route>
                     </Route>
                 </Route>
                 <Route path="/game/:serverId" element={<GameScreenView />} />

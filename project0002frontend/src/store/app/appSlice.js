@@ -21,7 +21,7 @@ export const getLobbyList = createAsyncThunk(
 const themeList = {
     defaultTheme:{
         name:"defaultTheme",
-        fontFamily: "'Poppins'",
+        fontFamily: "'Helvetica Neue LT Pro'",
         colors: {
             headerBG: '#ebfbff',
             headerText: '#000',

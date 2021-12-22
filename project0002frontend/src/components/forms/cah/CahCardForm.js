@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { addCard } from 'store/database/cahSlice';
 import { hidePopup } from 'store/ui/modalSlice';
-import { checkQuestion } from 'utils/CahCameUtils';
 import { deleteAttributesWithValue } from 'utils/ObjectUtils';
 
 

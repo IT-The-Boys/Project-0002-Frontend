@@ -1,10 +1,4 @@
-
-import chatService from "services/ws/chatService";
-
-
 const { createSlice, createSelector, createAsyncThunk } = require("@reduxjs/toolkit");
-
-
 
 const initialState = {
     chatStatus: "connecting",
@@ -65,75 +59,75 @@ const initialState = {
 
 }
 
-export const connectToChat = createAsyncThunk(
-    "chat/connect",
-    async (thunkAPI) => {
-        try {
-            chatService.startChat();
-            // thunkAPI.dispatch(setMessage(response.data.message));
-        } catch (error) {
-            const message = error.response.data;
+// export const connectToChat = createAsyncThunk(
+//     "chat/connect",
+//     async (thunkAPI) => {
+//         try {
+//             chatService.startChat();
+//             // thunkAPI.dispatch(setMessage(response.data.message));
+//         } catch (error) {
+//             console.log("error", error.response.data);
 
-        }
-    }
-);
+//         }
+//     }
+// );
 
-export const sendToChat = createAsyncThunk(
-    "chat/send",
-    async (payload, thunkAPI) => {
-        try {
-            console.log(payload)
-            const response = await chatService.sendTo(payload);
-            // thunkAPI.dispatch(setMessage(response.data.message));
-            return response;
-        } catch (error) {
-            const message = error.response.data;
-            // thunkAPI.dispatch(setMessage(message));
-            console.log(message);
-            return thunkAPI.rejectWithValue();
-        }
-    }
-);
+// export const sendToChat = createAsyncThunk(
+//     "chat/send",
+//     async (payload, thunkAPI) => {
+//         try {
+//             console.log(payload)
+//             const response = await chatService.sendTo(payload);
+//             // thunkAPI.dispatch(setMessage(response.data.message));
+//             return response;
+//         } catch (error) {
+//             const message = error.response.data;
+//             // thunkAPI.dispatch(setMessage(message));
+//             console.log(message);
+//             return thunkAPI.rejectWithValue();
+//         }
+//     }
+// );
 
-export const joinRoom = createAsyncThunk(
-    "chat/join",
-    async ({ username, password }, thunkAPI) => {
-        try {
-            const data = await chatService.login(username, password);
-            return { user: data };
-        } catch (error) {
-            const message =
-                (error.response &&
-                    error.response.data &&
-                    error.response.data.message) ||
-                error.message ||
-                error.toString();
-            // thunkAPI.dispatch(setMessage(message));
-            console.log(message);
-            return thunkAPI.rejectWithValue();
-        }
-    }
-);
+// export const joinRoom = createAsyncThunk(
+//     "chat/join",
+//     async ({ username, password }, thunkAPI) => {
+//         try {
+//             const data = await chatService.login(username, password);
+//             return { user: data };
+//         } catch (error) {
+//             const message =
+//                 (error.response &&
+//                     error.response.data &&
+//                     error.response.data.message) ||
+//                 error.message ||
+//                 error.toString();
+//             // thunkAPI.dispatch(setMessage(message));
+//             console.log(message);
+//             return thunkAPI.rejectWithValue();
+//         }
+//     }
+// );
 
-export const leaveRoom = createAsyncThunk(
-    "chat/join",
-    async ({ username, password }, thunkAPI) => {
-        try {
-            const data = await chatService.login(username, password);
-            return { user: data };
-        } catch (error) {
-            const message =
-                (error.response &&
-                    error.response.data &&
-                    error.response.data.message) ||
-                error.message ||
-                error.toString();
-            // thunkAPI.dispatch(setMessage(message));
-            console.log(message);
-            return thunkAPI.rejectWithValue();
-        }
-    }
-);
+// export const leaveRoom = createAsyncThunk(
+//     "chat/join",
+//     async ({ username, password }, thunkAPI) => {
+//         try {
+//             const data = await chatService.login(username, password);
+//             return { user: data };
+//         } catch (error) {
+//             const message =
+//                 (error.response &&
+//                     error.response.data &&
+//                     error.response.data.message) ||
+//                 error.message ||
+//                 error.toString();
+//             // thunkAPI.dispatch(setMessage(message));
+//             console.log(message);
+//             return thunkAPI.rejectWithValue();
+//         }
+//     }
+// );
 
 const chatSlice = createSlice({
     name: "chat",
@@ -166,19 +160,19 @@ const chatSlice = createSlice({
         // [connectToChat.rejected]: (state, action) => {
         //   state.chatStatus = "offline";
         // },
-        [joinRoom.fulfilled]: (state, action) => {
-            state.isAuthenticated = true;
-            state.isOpen = false;
-            state.user = action.payload.user;
-        },
-        [joinRoom.rejected]: (state, action) => {
-            state.isAuthenticated = false;
-            state.user = null;
-        },
-        [leaveRoom.fulfilled]: (state, action) => {
-            state.isAuthenticated = false;
-            state.user = null;
-        },
+        // [joinRoom.fulfilled]: (state, action) => {
+        //     state.isAuthenticated = true;
+        //     state.isOpen = false;
+        //     state.user = action.payload.user;
+        // },
+        // [joinRoom.rejected]: (state, action) => {
+        //     state.isAuthenticated = false;
+        //     state.user = null;
+        // },
+        // [leaveRoom.fulfilled]: (state, action) => {
+        //     state.isAuthenticated = false;
+        //     state.user = null;
+        //},
     },
 })
 

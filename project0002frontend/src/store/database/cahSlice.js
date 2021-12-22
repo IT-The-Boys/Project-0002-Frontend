@@ -4,22 +4,21 @@ import cardService from "services/api/cardService";
 const initialState = {
     setList: [],
     expansionList: [],
-    activeExpansion: 1,
+    activeExpansion: -1,
     activeSet: null,
     dbConnect: 'idle',
-    setData: '',
+    setData: {},
     error: null,
-    newCardList: [],
-    deletedCardList: [],
     temId: 0,
+    tempCardIdList: []
 }
 
 export const getSetList = createAsyncThunk(
     "wiki/setList",
     async (_, { getState }) => {
         try {
-            const { activeExpansion } = getState().cahWiki;
-            const response = await cardService.getSetList("CAH", activeExpansion);
+            const { expansionList, activeExpansion } = getState().cahWiki;
+            const response = await cardService.getSetList("CAH", expansionList[activeExpansion].name);
             // thunkAPI.dispatch(setMessage(response.data.message));
             return response.data;
         } catch (error) {
@@ -80,36 +79,25 @@ const cahSlice = createSlice({
             console.log(payload)
             if (Array.isArray(payload)) {
                 const list = payload.map(card => {
-                    card["id"] = state.temId++;
+                    card["cardId"] = `temp${state.temId++}`;
                     return card
                 })
-                state.newCardList = state.newCardList.concat(list)
+                const indexStart = state.setData.cardList.length;
+                list.map((id, index) => state.tempCardIdList.push(indexStart + index));
+                state.setData.cardList = state.setData.cardList.concat(list)
             } else {
-                payload["id"] = state.temId++;;
-                state.newCardList.push(payload)
+                payload["cardId"] = `temp${state.temId++}`;
+                state.setData.cardList.push(payload);
+                state.tempCardIdList.push(state.setData.cardList.length - 1)
             }
-
-
         },
         deleteCard: (state, { payload }) => {
-            console.log("delete card")
-            state.deletedCardList.push(payload)
-            // state.newCardList = state.newCardList.map(card => card.id === payload ? ({ ...card, "deleted": true }) : card)
+            state.setData.cardList[payload].isDeleted = true;
+            if (!state.setData.cardList[payload].cardId.startsWith("temp")) state.tempCardIdList.push(payload)
         },
         restoreCard: (state, { payload }) => {
-            console.log("resore card")
-            // state.newCardList = state.newCardList.map
-            //     (card => {
-            //         if (card.id === payload) {
-            //             const { deleted, ...rest } = card;
-            //             return rest
-            //         } else {
-            //             return card
-            //         }
-            const index= state.deletedCardList.indexOf(payload)
-            state.deletedCardList.splice(index, 1)
-            //     }
-            //     )
+            state.setData.cardList[payload].isDeleted = false;
+            if (!state.setData.cardList[payload].cardId.startsWith("temp")) state.tempCardIdList = state.tempCardIdList.filter(id => id !== payload)
         }
     },
     extraReducers: {
