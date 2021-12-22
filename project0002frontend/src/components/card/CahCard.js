@@ -24,7 +24,7 @@ const ActionList = ({ actions }) => {
     )
 }
 
-const CahCard = ({ card, border, idx }) => {
+const CahCard = ({ card, border, editMode, idx }) => {
     let cardType;
     const { tempCardIdList } = useSelector(state => state.cahWiki)
     const dispatch = useDispatch()
@@ -47,20 +47,25 @@ const CahCard = ({ card, border, idx }) => {
             cardType = TYPE_UNDEFINED;
     }
     return (
-        <StyledCahCard active type={cardType} border={border}>
+        <StyledCahCard type={cardType} border={border}>
             <StyledCahCardHeader>
-                {card.isDeleted ?
-                    <StyledCahCardRestoreIcon onClick={() => {
-                        dispatch(restoreCard(idx))
-                    }
-                    } />
-                    :
-                    <StyledCahCardDeleteIcon onClick={() => {
-                        dispatch(deleteCard(idx))
-                    }
-                    } />
+                {editMode ?
+                    <>
+                        {card.isDeleted ?
+                            <StyledCahCardRestoreIcon onClick={() => {
+                                dispatch(restoreCard(idx))
+                            }
+                            } />
+                            :
+                            <StyledCahCardDeleteIcon onClick={() => {
+                                dispatch(deleteCard(idx))
+                            }
+                            } />
+                        }
+                        <StyledCahCardEditIcon />
+                    </> : null
                 }
-                <StyledCahCardEditIcon />
+
             </StyledCahCardHeader>
             <StyledCahCardBody stamp={card.isDeleted ? deleteStamp : null}>
                 <StyledCahCardText type={cardType}>{card?.cardText}</StyledCahCardText>

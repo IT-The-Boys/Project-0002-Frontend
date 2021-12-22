@@ -51,7 +51,7 @@ const CardCarousel = ({ reversed, cardList, editMode }) => {
                             cardList.map((card, index) =>
 
                                 <StyledCarouselReversedCard reversed={reversed} key={index} visible={calcDisplayIndex(index)}>
-                                    <CahCard card={card} border={false} idx={index} />
+                                    <CahCard card={card} border={false} idx={index} editMode={editMode} />
                                 </StyledCarouselReversedCard>
                             )}
 
@@ -59,7 +59,7 @@ const CardCarousel = ({ reversed, cardList, editMode }) => {
                         <>
                             {cardList.map((card, index) =>
                                 <StyledCarouselCard key={index}>
-                                    <CahCard card={card} idx={index} />
+                                    <CahCard card={card} idx={index} editMode={editMode}  />
                                 </StyledCarouselCard>
                             )}
                         </>
@@ -80,7 +80,7 @@ const CardGrid = ({ cardList, editMode }) => {
                 }
                 {cardList.map((card, index) =>
                     <StyledGridCard key={index}>
-                        <CahCard card={card} border={true} idx={index} />
+                        <CahCard card={card} border={true} idx={index} editMode={editMode} />
                     </StyledGridCard>
                 )}
             </StyledGrid>
