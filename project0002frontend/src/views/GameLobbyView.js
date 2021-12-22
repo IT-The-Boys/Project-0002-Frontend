@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react'
-import ServerList from 'components/serverlist'
 import GameFilterForm from 'components/forms/GameFilterForm'
 import { useNavigate, useParams } from 'react-router'
 import { useSelector } from 'react-redux'
@@ -16,16 +15,16 @@ const GameLobbyView = () => {
         ,[lobbyId, navigate, lobbyList])
     return (
         <div>
-            <h1>{lobbyId}</h1>
+            {/* <h1>{lobbyId}</h1>
             <button> Create Game </button>
             <GameFilterForm />
             <div>
-                <input type='button' value='Create Your Game' onClick={togglePopup} />
+                <input type='button' value='Create Your Game' />
                 { isOpen && <CreateGamePopup 
-                    handleClose={togglePopup}
+                    
                 />}
             </div>
-            <ServerList />
+            <ServerList /> */}
         </div>
     )
 }

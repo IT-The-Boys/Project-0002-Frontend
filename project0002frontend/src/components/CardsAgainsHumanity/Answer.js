@@ -1,5 +1,6 @@
-import WhiteCard from 'components/GameAnswer/WhiteCard'
+import WhiteCard from 'components/GameAnswer/WhiteCard/WhiteCard'
 import React, { useState } from 'react'
+import cahGameSlice from 'store/game/cahGameSlice';
 import styled from 'styled-components'
 // import "./Answer.css"
 
@@ -69,18 +70,21 @@ transition:all 0.5s;
 const Answer = ({answer}) => {
     const [select, setSelect] = useState(false);
     const size=answer.cardList.length;
+    
+    const player = answer.player.playerName;
+    
+
     const clickHandler=()=>{
         if (select) {
-            console.log(answer.user)
-            alert(answer.user)
-            // alert(answer)
+            // console.log(answer.user)
+            // alert(answer.user)
+            console.log(player);
             setSelect(false);
     
         }
         else {
             setSelect(true);
         }
-    
 
     }
     return (
@@ -88,9 +92,13 @@ const Answer = ({answer}) => {
         <AnswerBlock onClick={clickHandler} cardNumber={size}>
             <div class="clear"></div>
             {answer.cardList.map( (card, index) => 
-                        <WhiteCard key={index} sentence={card.sentence}/>
+                        <WhiteCard key={index} cardText={card.cardText}/>
                     )
             }
+             {/* {answer.map( (card, index) => 
+                        <WhiteCard key={index} cardText={card.cardList}/>
+                    )
+            } */}
         </AnswerBlock>
     )
 }

@@ -13,10 +13,11 @@ const GameScreenView = () => {
         <div>
             <h1>GameAnswerSelectionView</h1>
             <div>
-                <input type='button' value='Create Your Answer' onClick={togglePopup} />
+                <AnswerSelectPopup />
+                {/* <input type='button' value='Create Your Answer' onClick={togglePopup} />
                 {isOpen && <AnswerSelectPopup
                     handleClose={togglePopup}
-                />}
+                />} */}
             </div>
             {/* <ServerList /> */}
         </div>

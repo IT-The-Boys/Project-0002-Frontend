@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
-import './index.css'
+import './WhiteCard.css'
 
 export default class WhiteCard extends Component {
     render() {
-        const {sentence,users} = this.props
+        const {cardText,users} = this.props
         return (
             <div>
                 {/* {console.log(key)} */}
@@ -13,7 +13,7 @@ export default class WhiteCard extends Component {
                 </div> */}
 
                 <div className="card" onClick={() => answerClick(users)}>
-                    <span>{sentence}</span>
+                    <span>{cardText}</span>
                 </div>
             </div>
 
@@ -22,6 +22,6 @@ export default class WhiteCard extends Component {
 }
 
 function answerClick(u){
-    console.log({u});
+    // console.log({u});
     // window.alert(u);
 }

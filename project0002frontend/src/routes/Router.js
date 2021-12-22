@@ -21,14 +21,14 @@ const Router = () => {
 
                 <Route path="/wiki/:gameId" element={<GameWikiView />} />
                 <Route path="/game" element={<GameScreenView />} />
-                <Route
+                {/* <Route
                     path=":pageName"
                     element={
                         <main style={{ padding: "1rem" }}>
                             <p>There's nothing here!</p>
                         </main>
                     }
-                />
+                /> */}
             </Routes>
         </BrowserRouter>
     )

@@ -4,7 +4,7 @@ const initialState = {
     currentQuestion: {
         cardSet: "",
         cardId: "",
-        cardText: "",
+        cardText: "You say tomato, I say _____.",
         cardType: "QUESTION",
         cardActions: ""
     },
@@ -18,14 +18,14 @@ const initialState = {
                 {
                     cardSet: "",
                     cardId: "",
-                    cardText: "",
+                    cardText: "The gays",
                     cardType: "ANSWER",
                     cardActions: ""
                 },
                 {
                     cardSet: "",
                     cardId: "",
-                    cardText: "",
+                    cardText: "Mom",
                     cardType: "ANSWER",
                     cardActions: ""
                 }
@@ -42,14 +42,14 @@ const initialState = {
                 {
                     cardSet: "",
                     cardId: "",
-                    cardText: "",
+                    cardText: "Bees?",
                     cardType: "ANSWER",
                     cardActions: ""
                 },
                 {
                     cardSet: "",
                     cardId: "",
-                    cardText: "",
+                    cardText: "Dad",
                     cardType: "ANSWER",
                     cardActions: ""
                 }
@@ -66,14 +66,14 @@ const initialState = {
                 {
                     cardSet: "",
                     cardId: "",
-                    cardText: "",
+                    cardText: "Grandmom",
                     cardType: "ANSWER",
                     cardActions: ""
                 },
                 {
                     cardSet: "",
                     cardId: "",
-                    cardText: "",
+                    cardText: "Grandpa",
                     cardType: "ANSWER",
                     cardActions: ""
                 }

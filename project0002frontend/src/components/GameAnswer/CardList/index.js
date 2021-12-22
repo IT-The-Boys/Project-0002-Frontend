@@ -1,6 +1,6 @@
 import { fireEvent } from '@testing-library/react'
 import React, { Component } from 'react'
-import WhiteCard from '../WhiteCard'
+import WhiteCard from '../WhiteCard/WhiteCard'
 
 export default class CardList extends Component {
     render() {
