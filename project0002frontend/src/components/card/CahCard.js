@@ -28,6 +28,7 @@ const CahCard = ({ card, border, editMode, idx }) => {
     let cardType;
     const { tempCardIdList } = useSelector(state => state.cahWiki)
     const dispatch = useDispatch()
+    if (card===undefined || card===null) return null; 
     switch (card.cardType) {
         case BLACK_CARD:
             if (tempCardIdList.includes(idx)) {
@@ -47,6 +48,7 @@ const CahCard = ({ card, border, editMode, idx }) => {
             cardType = TYPE_UNDEFINED;
     }
     return (
+
         <StyledCahCard type={cardType} border={border}>
             <StyledCahCardHeader>
                 {editMode ?

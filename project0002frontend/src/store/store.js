@@ -5,13 +5,15 @@ import lobby from './lobby/lobbySlice'
 import app from './app/appSlice'
 import modal from './ui/modalSlice'
 import cahWiki from './database/cahSlice'
+import form from './app/formSlice'
 const reducer = combineReducers({
   chat,
   auth,
   lobby,
   app,
   modal,
-  cahWiki
+  cahWiki,
+  form
 })
 
 const store = configureStore({

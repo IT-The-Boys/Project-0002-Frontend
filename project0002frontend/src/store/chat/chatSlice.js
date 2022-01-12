@@ -1,4 +1,4 @@
-const { createSlice, createSelector, createAsyncThunk } = require("@reduxjs/toolkit");
+const { createSlice, createSelector } = require("@reduxjs/toolkit");
 
 const initialState = {
     chatStatus: "connecting",

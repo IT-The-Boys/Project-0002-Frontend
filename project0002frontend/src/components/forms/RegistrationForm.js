@@ -1,11 +1,10 @@
+import { AuthFormGroup, AuthFormInput, AuthFormLabel, AuthFormSubmit } from 'components/styles/form/AuthForm.styled';
 import React, { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch} from 'react-redux';
 import { register } from 'store/auth/authSlice';
-import { AUTH_MODE_SIGNUP } from 'utils/constants/config';
 
 const RegistrationForm = () => {
     const [successful, setSuccessful] = useState(false);
-    const { authMode } = useSelector(state => state.modal)
     const dispatch = useDispatch();
     const [form, setForm] = useState({
         email: "",
@@ -44,62 +43,58 @@ const RegistrationForm = () => {
     }
 
     return (
-        <> {authMode === AUTH_MODE_SIGNUP ? (
-            <form>
-                <div className="form-group">
-                    <label htmlFor="email">Email address</label>
-                    <input type="email"
-                        className="form-control"
-                        id="email"
-                        placeholder="Enter email"
-                        value={form.email}
-                        onChange={handleChange}
-                        autoComplete="on"
-                    />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="username">Username</label>
-                    <input type="text"
-                        className="form-control"
-                        id="username"
-                        placeholder="Enter username"
-                        value={form.username}
-                        onChange={handleChange}
-                        autoComplete="on"
-                    />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="password">Password</label>
-                    <input type="password"
-                        className="form-control"
-                        id="password"
-                        placeholder="Password"
-                        value={form.password}
-                        onChange={handleChange}
-                        autoComplete="on"
-                    />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="password">Confirm Password</label>
-                    <input type="password"
-                        className="form-control"
-                        id="confirmPassword"
-                        placeholder="Confirm Password"
-                        value={form.confirmPassword}
-                        onChange={handleChange}
-                        autoComplete="on"
-                    />
-                </div>
-                <button
-                    type="submit"
-                    onClick={handleSubmit}
-                >
-                    Register
-                </button>
-            </form>
-        ) : null}
-        </>
-
+        <form>
+            <AuthFormGroup row="4">
+                <AuthFormLabel htmlFor="email">Email address</AuthFormLabel>
+                <AuthFormInput type="email"
+                    className="form-control"
+                    id="email"
+                    placeholder="Enter email"
+                    value={form.email}
+                    onChange={handleChange}
+                    autoComplete="on"
+                />
+            </AuthFormGroup>
+            <AuthFormGroup row="4">
+                <AuthFormLabel htmlFor="username">Username</AuthFormLabel>
+                <AuthFormInput type="text"
+                    className="form-control"
+                    id="username"
+                    placeholder="Enter username"
+                    value={form.username}
+                    onChange={handleChange}
+                    autoComplete="on"
+                />
+            </AuthFormGroup>
+            <AuthFormGroup row="4">
+                <AuthFormLabel htmlFor="password">Password</AuthFormLabel>
+                <AuthFormInput type="password"
+                    className="form-control"
+                    id="password"
+                    placeholder="Password"
+                    value={form.password}
+                    onChange={handleChange}
+                    autoComplete="on"
+                />
+            </AuthFormGroup>
+            <AuthFormGroup row="4">
+                <AuthFormLabel htmlFor="password">Confirm Password</AuthFormLabel>
+                <AuthFormInput type="password"
+                    className="form-control"
+                    id="confirmPassword"
+                    placeholder="Confirm Password"
+                    value={form.confirmPassword}
+                    onChange={handleChange}
+                    autoComplete="on"
+                />
+            </AuthFormGroup>
+            <AuthFormSubmit
+                type="submit"
+                onClick={handleSubmit}
+            >
+                Register
+            </AuthFormSubmit>
+        </form>
     )
 }
 

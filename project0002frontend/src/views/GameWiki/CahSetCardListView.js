@@ -11,7 +11,6 @@ const CahSetCardListView = () => {
     const writePermission = setData?.setInfo?.setExpansion?.writePermission;
     const hasPermission = writePermission ? user && setData.setInfo && user.userRoles.includes(setData.setInfo.setExpansion.writePermission) : false;
     return (
-
         <>
             <button onClick={() => setView(CARD_LIST_CAROUSEL)}>List</button>
             <button onClick={() => setView(CARD_LIST_GRID)}>Grid</button>

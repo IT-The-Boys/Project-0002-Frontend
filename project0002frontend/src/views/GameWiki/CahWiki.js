@@ -2,7 +2,6 @@ import CahSearchForm from 'components/forms/cah/CahSearchForm';
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Outlet } from 'react-router'
-import { setTheme } from 'store/app/appSlice';
 import { getExpansionList } from 'store/database/cahSlice';
 import CahExpansions from './CahExpansions'
 

@@ -36,7 +36,7 @@ const CardCarousel = ({ reversed, cardList, editMode }) => {
             }
         }
 
-    }, [currentIndex])
+    }, [cardList.length, currentIndex])
     return (
         <StyledCarouselBG>
             {editMode &&

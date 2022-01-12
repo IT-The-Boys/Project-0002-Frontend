@@ -1,139 +1,115 @@
+import CahCard from 'components/card/CahCard';
+import {
+    StyledFormContainer,
+    StyledInputContainer,
+    StyledPreviewContainer,
+    StyledFieldGroup,
+    StyledFormHeader,
+    StyledFieldLabel,
+    StyledBtn,
+    StyledSwitch,
+    StyledSwitchSpan
+} from 'components/styles/form/AddCardForm.styled';
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { clearForm, setField } from 'store/app/formSlice';
 import { addCard } from 'store/database/cahSlice';
 import { hidePopup } from 'store/ui/modalSlice';
 import { deleteAttributesWithValue } from 'utils/ObjectUtils';
 
-
-const ValidatedInput = (props) => {
-    const { label, errorMessage, onChange, tag, ...inputProps } = props;
-
-    return (
-        <div className="formInput">
-            <label>{label}</label>
-            <input
-                {...inputProps}
-                onChange={onChange}
-            />
-            <span>{errorMessage}</span>
-        </div>
-    );
-}
-
 const CahCardForm = () => {
+
     const dispatch = useDispatch();
     const { addCardPopup } = useSelector(state => state.modal)
-    const defaultForm = {
-        cardType: "ANSWER",
-        cardText: "",
-        cardActions: {
-            "pick": null,
-            "draw": null
-        }
-    }
-    const [formData, setFormData] = useState(defaultForm
-    )
-    const formFields = [
-        {
-            id: "cardText",
-            tag: <input />,
-            type: "text",
-            placeholder: "Enter Card text",
-            errorMessage:
-                "Please enter card text",
-            label: "cardText",
-            required: true,
-        },
-
-    ]
+    const { cardForm } = useSelector(state => state.form)
     const [hasActions, setHasActions] = useState(false)
     const [edited, setEdited] = useState(false)
     const submitHandler = (e) => {
         e.preventDefault();
-        let cleanedData = deleteAttributesWithValue(formData, [null, undefined], true)
+        let cleanedData = deleteAttributesWithValue(cardForm, [null, undefined], true)
         //ToDo add form validation
-        // if (formData.cardType === "QUESTION")
-        //     switch (checkQuestion(formData.cardText)) {
-        //         case 0: console.log("error"); break;
-        //         case 1: {
-        //             console.log("as planned");
-        //             dispatch(addCard(cleanedData))
-        //             dispatch(hidePopup("addCardPopup"));
-        //             break;
-        //         }
-        //         default: console.log("need to check card actions")
-        //     }
-        // else {
-        //     dispatch(addCard(cleanedData))
-        //     dispatch(hidePopup("addCardPopup"));
-        // }
-        dispatch(addCard(cleanedData))
-        setFormData(defaultForm);
+        dispatch(addCard(cleanedData));
+        dispatch(clearForm("cardForm"));
         dispatch(hidePopup("addCardPopup"));
-
-
     }
     const changeHandler = (e) => {
         const { id, value } = e.target;
-        const parent = e.target.parentNode.id;
-        if (parent) {
-            setFormData(prevState => ({
-                ...prevState,
-                [parent]: { ...prevState[parent], [id]: value }
-            }))
-        } else {
-            setFormData(prevState => ({
-                ...prevState,
-                [id]: value
-            }))
-        }
+        dispatch(setField(["cardForm", id, value]))
         setEdited(true)
+    }
+    const switchHandler =() => {
+        if (cardForm.cardType==="ANSWER") {
+            setEdited(true)
+        } else {
+            setEdited(false)
+        }
+        
     }
 
     return (
         <>
             {addCardPopup ? (
-                <form onSubmit={submitHandler}>
-                    <h1>Add card</h1>
-                    card type
-                    <select
-                        id="cardType"
-                        value={formData.cardType}
-                        onChange={changeHandler}>
-                        <option value="ANSWER">white</option>
-                        <option value="QUESTION">black</option>
-                    </select>
-                    {formData.cardType === "QUESTION" && <div>has actions <input type="checkbox" onChange={() => setHasActions(!hasActions)} /></div>}
-                    {hasActions &&
-                        <div id="cardActions"> Actions
-                            Pick <input type="text" placeholder="" id="pick"
-                                value={formData.cardActions.pick ? formData.cardActions.pick : ""}
-                                onChange={changeHandler} />
-                            Draw <input type="text" placeholder="" id="draw"
-                                value={formData.cardActions.draw ? formData.cardActions.draw : ""}
-                                onChange={changeHandler} />
-                        </div>}
-                    <br />
+                <StyledFormContainer>
+                    <StyledInputContainer>
+                        <form onSubmit={submitHandler}>
+                            <StyledFormHeader>Add card</StyledFormHeader>
+                            <StyledFieldGroup row={8}>
+                                <StyledFieldLabel>
+                                    Type:
+                                </StyledFieldLabel>
+                                <select
+                                    id="cardType"
+                                    value={cardForm.cardType}
+                                    onChange={changeHandler}>
+                                    <option value="ANSWER">white</option>
+                                    <option value="QUESTION">black</option>
+                                </select>
+                            </StyledFieldGroup>
+                            <StyledFieldGroup>
+                                {/* <StyledSwitch onClick={switchHandler}>
+                                    <StyledSwitchSpan>
+                                        {cardForm.cardType==="ANSWER"?"White":"Black"}
+                                    </StyledSwitchSpan>
+                                </StyledSwitch> */}
+                            </StyledFieldGroup>
+                            <StyledFieldGroup row={5}>
+                                <StyledFieldLabel>Text:</StyledFieldLabel>
+                                <textarea placeholder='Enter card text' id="cardText" value={cardForm.cardText} onChange={changeHandler} rows="3" cols="30" />
+                            </StyledFieldGroup>
+                            <StyledFieldGroup row={4}>
+                                {cardForm.cardType === "QUESTION" && <div>has actions <input type="checkbox" onChange={() => setHasActions(!hasActions)} /></div>}
+                                {hasActions &&
+                                    <>
+                                        <StyledFieldLabel>Pick:</StyledFieldLabel>
+                                        <input type="text" placeholder="" id="pick"
+                                            value={cardForm.pick}
+                                            onChange={changeHandler} />
+                                        <StyledFieldLabel>
+                                            Draw:
+                                        </StyledFieldLabel>
+                                        <input type="text" placeholder="" id="draw"
+                                            value={cardForm.draw}
+                                            onChange={changeHandler} />
+                                    </>}
+                            </StyledFieldGroup>
+                            <StyledFieldGroup row={5}>
+                                <StyledBtn visible={edited} onClick={() => {
+                                    dispatch(clearForm("cardForm"));
+                                    setHasActions(false);
+                                    setEdited(false);
+                                }}>reset</StyledBtn>
+                                <StyledBtn type="submit" visible={true} disabled={cardForm.cardText ? false : true}>add</StyledBtn>
 
-                    {formFields.map((field) => (
-                        <ValidatedInput
-                            key={field.id}
-                            {...field}
-                            value={formData[field.id]}
-                            onChange={changeHandler}
-                        />
-                    ))}
+                            </StyledFieldGroup>
 
-                    <button type="submit" disabled={formData.cardText ? false : true}>add</button>
-                    {edited && <button onClick={() => {
-                        setFormData(defaultForm)
-                        setHasActions(false)
-                        setEdited(false)
-                    }}>reset</button>}
-
-                    <button onClick={() => dispatch(hidePopup("addCardPopup"))}>close</button>
-                </form>
+                        </form>
+                    </StyledInputContainer>
+                    <StyledPreviewContainer cardType={cardForm.cardType}>
+                        <CahCard card={cardForm} border={false} editMode={false} />
+                    </StyledPreviewContainer>
+                </StyledFormContainer>
             ) : null
+
             }
         </>
     )

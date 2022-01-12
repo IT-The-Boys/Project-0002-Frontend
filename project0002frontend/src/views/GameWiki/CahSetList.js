@@ -10,7 +10,7 @@ const CahSetList = () => {
     const sI = useParams().setId;
     const eN = useParams().expansion;
     const {
-        setList, expansionList} = useSelector((state) => state.cahWiki);
+        setList, expansionList } = useSelector((state) => state.cahWiki);
     const dispatch = useDispatch();
     const navigate = useNavigate();
     useEffect(() => {
@@ -22,13 +22,17 @@ const CahSetList = () => {
     }, [dispatch, eN, expansionList, navigate, sI])
     return (
         <>
-            <StyledScrollableBG>
-                <StyledScrollable>
-                    {setList?.map((set, index) =>
-                        <StyledScrollableCard key={index} data-title={set.setName}>{set.setName}</StyledScrollableCard>
-                    )}
-                </StyledScrollable>
-            </StyledScrollableBG>
+            {setList?.length > 0 ?
+                <StyledScrollableBG>
+                    <StyledScrollable>
+                        {setList.map((set, index) =>
+                            <StyledScrollableCard key={index} data-title={set.setName}>{set.setName}</StyledScrollableCard>
+                        )}
+                    </StyledScrollable>
+                </StyledScrollableBG>
+                :
+                null
+            }
             <Outlet />
         </>
 

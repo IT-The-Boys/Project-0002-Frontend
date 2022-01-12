@@ -3,11 +3,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { hidePopup } from 'store/ui/modalSlice';
 import { login } from 'store/auth/authSlice';
-import { AUTH_MODE_SIGNIN } from 'utils/constants/config';
+import { AuthFormGroup, AuthFormInput, AuthFormLabel, AuthFormSubmit } from 'components/styles/form/AuthForm.styled';
 
-const SignInForm = () => {
-    const {toUrl} = useSelector(state => state.auth)
-    const {authMode} = useSelector(state => state.modal)
+const AuthForm = () => {
+    const { toUrl } = useSelector(state => state.auth)
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [form, setForm] = useState({
@@ -38,41 +37,37 @@ const SignInForm = () => {
 
     }
     return (
-        <> {authMode===AUTH_MODE_SIGNIN ? (
-            <form>
-                <div className="form-group">
-                    <label htmlFor="username">Username</label>
-                    <input type="text"
-                        className="form-control"
-                        id="username"
-                        placeholder="Enter username"
-                        value={form.username}
-                        onChange={handleChange}
-                        autoComplete="on"
-                    />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="password">Password</label>
-                    <input type="password"
-                        className="form-control"
-                        id="password"
-                        placeholder="Password"
-                        value={form.password}
-                        onChange={handleChange}
-                        autoComplete="on"
-                    />
-                </div>
-                <button
-                    type="submit"
-                    onClick={handleSubmit}
-                >
-                    Login
-                </button>
-            </form>
-        ):null
-        }
-        </>
+        <form>
+            <AuthFormGroup row="2">
+                <AuthFormLabel htmlFor="username">Username</AuthFormLabel>
+                <AuthFormInput type="text"
+                    className="form-control"
+                    id="username"
+                    placeholder="Enter username"
+                    value={form.username}
+                    onChange={handleChange}
+                    autoComplete="on"
+                />
+            </AuthFormGroup>
+            <AuthFormGroup row="2">
+                <AuthFormLabel htmlFor="password">Password</AuthFormLabel>
+                <AuthFormInput type="password"
+                    className="form-control"
+                    id="password"
+                    placeholder="Password"
+                    value={form.password}
+                    onChange={handleChange}
+                    autoComplete="on"
+                />
+            </AuthFormGroup>
+            <AuthFormSubmit
+                type="submit"
+                onClick={handleSubmit}
+            >
+                Login
+            </AuthFormSubmit>
+        </form>
     )
 }
 
-export default SignInForm
+export default AuthForm

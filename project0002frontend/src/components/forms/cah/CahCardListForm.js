@@ -1,3 +1,4 @@
+import { StyledFormContainer } from 'components/styles/form/AddCardForm.styled';
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { addCard } from 'store/database/cahSlice';
@@ -35,10 +36,10 @@ const CahCardListForm = () => {
     return (
         <>
             {true ?
-                <div>
+                <StyledFormContainer>
                     <textarea onChange={changeHandler} placeholder="cardType|cardText|pick|0|draw|0"></textarea>
                     <button onClick={submitHandler}>add</button>
-                </div> :
+                </StyledFormContainer> :
                 null
             }
         </>

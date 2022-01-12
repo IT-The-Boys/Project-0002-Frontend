@@ -8,6 +8,11 @@ export const CHAT_SERVICE_URL = API_URL+'ws/chat/';
 export const AUTH_MODE_SIGNUP ="signUp"
 export const AUTH_MODE_SIGNIN ="signIn"
 
+// authentication window mode 
+export const CARD_MODE_SINGLE ="single"
+export const CARD_MODE_BULK ="bulk"
+export const CARD_MODE_EDIT ="edit"
+
 // auth chat window mode 
 export const CHAT_MODE_MIN =0
 export const CHAT_MODE_ROOM =1
