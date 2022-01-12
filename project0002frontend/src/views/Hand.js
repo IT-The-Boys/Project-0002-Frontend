@@ -1,73 +1,56 @@
 import ConfirmHandPopup from 'components/popup/comfirmHandPopup/ConfirmHandPopup'
 import React, { useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { deletePlayerAnswer, setPlayerAnswer } from 'store/game/cahGameSlice'
 
 const Hand = (props) => {
-  let cahGame = useSelector(state => state.cahGame)
-  let [ playerHand ] = useState(cahGame.playerHand)
-  let playerAnswer = []
-  let playerAnswerflg = []
-  let cardPick = cahGame.currentQuestion.cardPick
-  console.log(playerAnswer)
+  const dispatch = useDispatch()
+  const { playerHand, playerAnswer, currentQuestion } = useSelector(state => state.cahGame)
+  console.log("answer id", playerAnswer)
+  let cardPick = currentQuestion.cardPick
+  const [answerCounter, setAnswerCounter] = useState(1)
 
+  // Control popup
   const [isOpen, setIsOpen] = useState(false);
-
   const togglePopup = () => {
+    if (isOpen) { 
+      playerAnswer.forEach(id => {
+        dispatch(deletePlayerAnswer(id))
+      });
+      setAnswerCounter(1)
+    }
     setIsOpen(!isOpen);
   }
 
-  //for css
-  const CARD_SELECTED = 'selected'
-  const CARD_NOT_SELECTED = 'notselected' 
-
-  let answerCounter = 0
-
-  const cardSelectHandler = (e) => {
-    playerHand.map((tmp) => { 
-      if(tmp.cardId === parseInt(e)){
-        if(playerAnswerflg[tmp.cardId]){
-          //If player clicked card already selected
-          playerAnswer.forEach((element, index) => {
-            if(element === tmp.cardId){
-              console.log("hello")
-              playerAnswer.splice(index, 1)
-              playerAnswerflg[tmp.cardId] = false
-            }
-          });
-          answerCounter -= 1
-        }else{
-          playerAnswer.push(tmp.cardId)
-          playerAnswerflg[tmp.cardId] = true
-          answerCounter += 1
-        }
-        
-        if(cardPick === answerCounter){
-          togglePopup()
-          console.log("enough cards")
-        }
-        console.log(playerAnswer)
-        console.log(playerAnswerflg)
-      }
-      return e
-    })
+  const cardSelectHandler = (id) => {
+    //If player clicked card already selected
+    if (playerAnswer.includes(id)) {
+      setAnswerCounter(answerCounter - 1)
+      dispatch(deletePlayerAnswer(id))
+    } else {
+      setAnswerCounter(answerCounter + 1)
+      dispatch(setPlayerAnswer(id))
+    }
+    console.log("AnswerCounter :", answerCounter)
+    if (cardPick === answerCounter) {
+      togglePopup()
+      console.log("Cards are Selected")
+    }
   }
 
-  return (
-    <div>
-      <h1>Pick {cardPick} answer</h1>
-      {playerHand.map((tmp, index) => {
-        playerAnswerflg[tmp.cardId] = tmp.isSelected
-        return <div key={index}><fieldset>
-          <button value={tmp.cardId} onClick={e => cardSelectHandler(e.target.value)}>{tmp.cardText}</button>
-        </fieldset></div>
-      })}
-      { isOpen && <ConfirmHandPopup 
-        handleClose={togglePopup}
-        comfirmHands={playerAnswer}
-        //playerAnswerの中身渡せてないよ
-      />}
-    </div>
-  )
+return (
+  <div>
+    <h1>Pick {cardPick} answer</h1>
+    {playerHand.map((card, index) => {
+      return <div key={index}><fieldset>
+        <button value={card.cardId} onClick={() => cardSelectHandler(index)}>{card.cardText}</button>
+      </fieldset></div>
+    })}
+    {isOpen && <ConfirmHandPopup
+      handleClose={togglePopup}
+    />}
+  </div>
+)
 }
 
 export default Hand

@@ -79,7 +79,7 @@ const initialState = {
             isConfirmed: false
         }
     ],
-    playerAnswer: [0, 2],
+    playerAnswer: [],
     playerHand: [
         {
             cardId: 0,
@@ -154,7 +154,12 @@ const gameSlice = createSlice({
     name: "cahgame",
     initialState,
     reducers: {
-        
+        setPlayerAnswer:(state, {payload})=>{
+            state.playerAnswer.push(payload);
+        },
+        deletePlayerAnswer:(state, {payload})=>{
+            state.playerAnswer=state.playerAnswer.filter(answer=>answer!==payload)
+        }
     }
 })
 
@@ -166,5 +171,5 @@ export const playerData = createSelector(
     }
 )
 
-export const {  } = gameSlice.actions;
+export const { setPlayerAnswer, deletePlayerAnswer } = gameSlice.actions;
 export default gameSlice.reducer
