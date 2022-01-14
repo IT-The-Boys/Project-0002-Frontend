@@ -37,14 +37,22 @@ const CahCardForm = () => {
         dispatch(setField(["cardForm", id, value]))
         setEdited(true)
     }
-    const switchHandler =() => {
-        if (cardForm.cardType==="ANSWER") {
+    const switchHandler = () => {
+        if (cardForm.cardType === "ANSWER") {
+            dispatch(setField(["cardForm", "cardType", "QUESTION"]))
             setEdited(true)
         } else {
+            dispatch(setField(["cardForm", "cardType", "ANSWER"]))
             setEdited(false)
         }
-        
+
     }
+    const resetHandler = () => {
+        dispatch(clearForm("cardForm"));
+        setHasActions(false);
+        setEdited(false);
+    }
+
 
     return (
         <>
@@ -53,24 +61,12 @@ const CahCardForm = () => {
                     <StyledInputContainer>
                         <form onSubmit={submitHandler}>
                             <StyledFormHeader>Add card</StyledFormHeader>
-                            <StyledFieldGroup row={8}>
-                                <StyledFieldLabel>
-                                    Type:
-                                </StyledFieldLabel>
-                                <select
-                                    id="cardType"
-                                    value={cardForm.cardType}
-                                    onChange={changeHandler}>
-                                    <option value="ANSWER">white</option>
-                                    <option value="QUESTION">black</option>
-                                </select>
-                            </StyledFieldGroup>
                             <StyledFieldGroup>
-                                {/* <StyledSwitch onClick={switchHandler}>
-                                    <StyledSwitchSpan>
-                                        {cardForm.cardType==="ANSWER"?"White":"Black"}
+                                <StyledSwitch onClick={switchHandler} color={cardForm.cardType === "ANSWER" ? "white" : "black"} >
+                                    <StyledSwitchSpan color={cardForm.cardType === "ANSWER" ? "black" : "white"}>
+                                        {cardForm.cardType === "ANSWER" ? "White" : "Black"}
                                     </StyledSwitchSpan>
-                                </StyledSwitch> */}
+                                </StyledSwitch>
                             </StyledFieldGroup>
                             <StyledFieldGroup row={5}>
                                 <StyledFieldLabel>Text:</StyledFieldLabel>
@@ -93,11 +89,8 @@ const CahCardForm = () => {
                                     </>}
                             </StyledFieldGroup>
                             <StyledFieldGroup row={5}>
-                                <StyledBtn visible={edited} onClick={() => {
-                                    dispatch(clearForm("cardForm"));
-                                    setHasActions(false);
-                                    setEdited(false);
-                                }}>reset</StyledBtn>
+                                <StyledBtn type="button"
+                                    visible={edited} onClick={resetHandler}>reset</StyledBtn>
                                 <StyledBtn type="submit" visible={true} disabled={cardForm.cardText ? false : true}>add</StyledBtn>
 
                             </StyledFieldGroup>

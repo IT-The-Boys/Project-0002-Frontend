@@ -5,8 +5,8 @@ const initialState = {
     cardForm: {
         cardType: "ANSWER",
         cardText: "",
-        pick: null,
-        draw: null
+        pick: "",
+        draw: ""
     },
 }
 

@@ -146,5 +146,9 @@ export const StyledCahCard = styled.div`
     color: ${({ type }) => cardType[type].color};
     border: ${({ border, type }) => !border && ["black_card", "white_card"].includes(type) ? null : cardType[type].border};
     border-radius:${multi * width / 10}px;
+    -moz-transition: all 1s ease-out;
+    -o-transition: all 1s ease-out;
+    -webkit-transition: all 1s ease-out;
+    transition: all 1s ease-out;
     float: left;
 `
