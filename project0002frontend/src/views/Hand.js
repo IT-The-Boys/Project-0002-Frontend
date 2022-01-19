@@ -50,7 +50,6 @@ return (
       handleClose={togglePopup}
     />}
   </div>
-)
-}
+)}
 
 export default Hand

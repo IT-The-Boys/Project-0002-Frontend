@@ -6,18 +6,21 @@ const ConfirmHandPopup = (props) => {
   let {playerAnswer, playerHand} = useSelector(state => state.cahGame)
   console.log(playerAnswer)
   console.log(playerHand)
+
   return (
     <div className='popup-box'>
       <div className='box'>
         <span className='close-Icon' onClick={props.handleClose}>X</span>
-        {playerAnswer.forEach(id => {
-          playerHand.map((hand) => {
-            if(hand.cardId === id){
-              console.log("hit")
-              return <div value={hand.cardId}><fieldset>{hand.cardText}</fieldset></div>
+        <div className='answerArea'>
+        {playerAnswer.map((id, ind) => {
+          playerHand.map((hand, index) => {
+            if(id === hand.cardId){
+              console.log("from prev page: ", id, "  this page", hand.cardText)
+              return <div key={index}>{hand.cardText}</div>
             }
           })
         })}
+        </div>
       </div>
     </div>
   )
