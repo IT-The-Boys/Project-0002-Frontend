@@ -1,18 +1,25 @@
 import axios from "axios";
-import { LOBBY_URL } from "utils/constants/config";
+import { CAH_GAME_LIST, LOBBY_URL } from "utils/constants/config";
 
 
 const getLobbyList = () => {
-  console.log(LOBBY_URL)
   return axios({
       method: "get",
       url: LOBBY_URL,
     })
 };
 
+const getGameList = () => {
+  return axios({
+      method: "get",
+      url: CAH_GAME_LIST,
+    })
+};
+
 
 const authService = {
-    getLobbyList
+    getLobbyList,
+    getGameList
 };
 
 export default authService;

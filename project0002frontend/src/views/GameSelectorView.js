@@ -23,7 +23,7 @@ const GameSelectorView = () => {
         <div>
             <h1>GameSelectorView</h1>
             {
-                lobbyList.map(lobby => <LobbyCard handleClick={handleClick} lobby={lobby} key={lobby.lobbyId} />)
+                lobbyList?.map(lobby => <LobbyCard handleClick={handleClick} lobby={lobby} key={lobby.lobbyId} />)
             }
             
         </div>

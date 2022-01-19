@@ -1,7 +1,25 @@
-const { createSlice, createSelector } = require("@reduxjs/toolkit");
+import lobbyService from "services/api/lobbyService";
+
+const { createSlice, createSelector, createAsyncThunk } = require("@reduxjs/toolkit");
+
+export const getCahGameList = createAsyncThunk(
+    "app/fetchGameLis",
+    async (thunkAPI) => {
+        try {
+            const response = await lobbyService.getGameList();
+            return response.data;
+        } catch (error) {
+            const message = error.response.data;
+            // thunkAPI.dispatch(setMessage(message));
+            console.log(message);
+            return thunkAPI.rejectWithValue();
+        }
+    }
+);
 
 const initialState = {
     lobbyServer: null,
+    lobbyStatus:"idle",
     serverDefaultSettings:
     {
         playerLimit: 10,
@@ -75,8 +93,23 @@ const lobbySlice = createSlice({
                     state.serverFilter[key] = value;
                 });
         }
-    }
+    },
+    extraReducers: {
+        [getCahGameList.pending]: (state) => {
+            state.status = "pending";
+        },
+        [getCahGameList.fulfilled]: (state, {payload}) => {
+            state.status = "succeeded";
+            state.serverList = payload;
+        },
+        [getCahGameList.rejected]: (state, payload) => {
+            state.status = "failed";
+            state.error = payload;
+        }
+    },
 })
+
+
 
 export const getFilteredServerList = createSelector(
     (state) => state.lobby,

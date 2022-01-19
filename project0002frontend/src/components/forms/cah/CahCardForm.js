@@ -8,7 +8,9 @@ import {
     StyledFieldLabel,
     StyledBtn,
     StyledSwitch,
-    StyledSwitchSpan
+    StyledSwitchSpan,
+    StyledCardText,
+    StyledFooter
 } from 'components/styles/form/AddCardForm.styled';
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
@@ -69,11 +71,14 @@ const CahCardForm = () => {
                                 </StyledSwitch>
                             </StyledFieldGroup>
                             <StyledFieldGroup row={5}>
-                                <StyledFieldLabel>Text:</StyledFieldLabel>
-                                <textarea placeholder='Enter card text' id="cardText" value={cardForm.cardText} onChange={changeHandler} rows="3" cols="30" />
+                                <StyledFieldLabel>Enter card text:</StyledFieldLabel>
+                                <StyledCardText placeholder='Enter card text' id="cardText" value={cardForm.cardText} onChange={changeHandler} rows="3" cols="30" />
                             </StyledFieldGroup>
                             <StyledFieldGroup row={4}>
-                                {cardForm.cardType === "QUESTION" && <div>has actions <input type="checkbox" onChange={() => setHasActions(!hasActions)} /></div>}
+                                {cardForm.cardType === "QUESTION" && 
+                                <>Card actions 
+                                <StyledSwitch type="checkbox" onChange={() => setHasActions(!hasActions)}></StyledSwitch>
+                                </>}
                                 {hasActions &&
                                     <>
                                         <StyledFieldLabel>Pick:</StyledFieldLabel>
@@ -88,12 +93,11 @@ const CahCardForm = () => {
                                             onChange={changeHandler} />
                                     </>}
                             </StyledFieldGroup>
-                            <StyledFieldGroup row={5}>
+                            <StyledFooter row={5} >
+                                <StyledBtn type="submit" cursor="cell" visible={true} disabled={cardForm.cardText ? false : true}>add</StyledBtn>
                                 <StyledBtn type="button"
-                                    visible={edited} onClick={resetHandler}>reset</StyledBtn>
-                                <StyledBtn type="submit" visible={true} disabled={cardForm.cardText ? false : true}>add</StyledBtn>
-
-                            </StyledFieldGroup>
+                                    visible={edited}  cursor="pointer"onClick={resetHandler}>reset</StyledBtn>
+                            </StyledFooter>
 
                         </form>
                     </StyledInputContainer>

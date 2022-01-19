@@ -2,6 +2,7 @@
 export const API_URL = "http://127.0.0.1:8080/api/v1/";
 export const AUTH_URL = API_URL+'user/';
 export const LOBBY_URL = API_URL+'lobby/';
+export const CAH_GAME_LIST = "http://127.0.0.1:8080/lobby/gameServerList"
 
 export const CHAT_SERVICE_URL = API_URL+'ws/chat/';
 // authentication window mode 

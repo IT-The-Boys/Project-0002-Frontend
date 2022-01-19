@@ -58,7 +58,7 @@ const themeList = {
 
 const initialState = {
     lobbyList: [],
-    status: 'idle',
+    lobbyStatus: 'idle',
     error: null,
     currentTheme: themeList.cahTheme,
 }
@@ -73,14 +73,14 @@ const appSlice = createSlice({
     },
     extraReducers: {
         [getLobbyList.pending]: (state) => {
-            state.status = "pending";
+            state.lobbyStatus = "pending";
         },
         [getLobbyList.fulfilled]: (state, {payload}) => {
-            state.status = "succeeded";
+            state.lobbyStatus = "succeeded";
             state.lobbyList = payload;
         },
         [getLobbyList.rejected]: (state, payload) => {
-            state.status = "failed";
+            state.lobbyStatus = "failed";
             state.error = payload;
         }
     },

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { css } from "styled-components";
 
 export const StyledInputContainer = styled.div`
 display:flex;
@@ -41,6 +42,7 @@ text-align: center;
 `
 export const StyledFieldGroup = styled.div`
 display:flex;
+margin-top:3px;
 flex-direction:column;
 -moz-transition: all 1s ease-out;
 -o-transition: all 1s ease-out;
@@ -52,7 +54,8 @@ height: ${({ row }) => 500 / row}px;
 export const StyledFooter = styled.div`
 float: end;
 display:flex;
-flex-direction:column;
+flex-direction:row;
+justify-content: center;
 width: 100%;
 height:100px;
 `
@@ -60,12 +63,28 @@ export const StyledFieldLabel = styled.label`
 margin-bottom:10px;
 `
 export const StyledBtn = styled.button`
-visibility: ${({ visible }) => visible ? "visible" : "hidden"};
-margin-top: 5px;
--moz-transition: visibility 1s linear;
--o-transition: visibility 1s linear;
--webkit-transition: visibility 1s linear;
-transition: visibility 1s linear;
+  visibility: ${({ visible }) => visible ? "visible" : "hidden"};
+  cursor: ${({cursor})=>cursor};
+  display:inline-block; 
+  width: 60px;
+  height:30px;
+  padding:0.35em 1.2em;
+  border: 2px solid white; 
+  border-radius:8px; 
+  box-sizing: border-box; 
+  text-decoration:none; 
+  margin: 5px;
+  background-color:black;
+  color:white; 
+  text-align:center; 
+  transition: all 0.2s; } 
+    &:hover{ 
+      color:black; 
+      background-color:white; 
+    }
+    ${props => props.disabled && css`
+      cursor: not-allowed;
+    `}
 `
 
 export const StyledSwitch = styled.div`
@@ -91,10 +110,10 @@ export const StyledSwitch = styled.div`
   -webkit-box-shadow: 0px 0.5px 2.5px #6f6f6f;
   box-shadow: 0px 0.5px 2.5px #6f6f6f;
   &:before{
-    -moz-transition: all 1s ease-out;
-    -o-transition: all 1s ease-out;
-    -webkit-transition: all 1s ease-out;
-    transition: all 1s ease-out;
+    -moz-transition: all 1s linear;
+    -o-transition: all 1s linear;
+    -webkit-transition: all 1s linear;
+    transition: all 1s linear;
     position: absolute;
     content: "";
     height: 28px;
@@ -111,6 +130,13 @@ export const StyledSwitch = styled.div`
     box-shadow: 2.5px 0 5px #6f6f6f;
   }
 `
+export const StyledCardText = styled.textarea`
+  resize: none;
+  padding: 5px;
+  border: 3px solid white;
+  border-radius: 10px;
+`
+
 export const StyledSwitchSpan = styled.div`
 color:${({ color }) => color};
 

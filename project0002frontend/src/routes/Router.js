@@ -24,7 +24,6 @@ const Router = () => {
             <AuthenticationPopup />
             {/* <Chat /> */}
             <Routes>
-
                 <Route path="/" element={<GameSelectorView />} />
 
                 <Route path="/lobby/:lobbyId" element={<PrivateRoute />} >
