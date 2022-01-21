@@ -15,13 +15,18 @@ const Router = () => {
         <BrowserRouter>
             <Routes>
                 <Route path="/" element={<GameSelectorView />} />
-                <Route path="/lobby/:lobbyId" element={<PrivateRoute />} >
+                {/* <Route path="/lobby/:lobbyId" element={<PrivateRoute />} > */}
                     <Route path="/lobby/:lobbyId" element={<GameLobbyView />} />
-                </Route>
+                {/* </Route> */}
 
                 <Route path="/wiki/:gameId" element={<GameWikiView />} />
+<<<<<<< HEAD
                 <Route path="/game" element={<GameScreenView />} />
                 {/* <Route
+=======
+                <Route path="/game/:serverId" element={<GameScreenView />} />
+                <Route
+>>>>>>> origin/View_Lobby
                     path=":pageName"
                     element={
                         <main style={{ padding: "1rem" }}>

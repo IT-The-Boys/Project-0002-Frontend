@@ -1,12 +1,17 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createSelector } from "@reduxjs/toolkit";
 
 const initialState = {
     currentQuestion: {
+<<<<<<< HEAD
         cardSet: "",
         cardId: "",
         cardText: "You say tomato, I say _____.",
         cardType: "QUESTION",
         cardActions: ""
+=======
+        cardText: "",
+        cardPick: 2
+>>>>>>> origin/View_Lobby
     },
     playerAnswerList: [
         {
@@ -82,82 +87,45 @@ const initialState = {
             isConfirmed: false
         }
     ],
+    playerAnswer: [0, 2],
     playerHand: [
         {
-            cardSet: "",
-            cardId: "",
-            cardText: "",
-            cardType: "ANSWER",
-            cardActions: "",
+            cardId: 0,
+            cardText:"test1",
             isSelected: false,
-            isConfirmed: false
         }, {
-            cardSet: "",
-            cardId: "",
-            cardText: "",
-            cardType: "ANSWER",
-            cardActions: "",
+            cardId: 1,
+            cardText:"test2",
             isSelected: false,
-            isConfirmed: false
         }, {
-            cardSet: "",
-            cardId: "",
-            cardText: "",
-            cardType: "ANSWER",
-            cardActions: "",
+            cardId: 2,
+            cardText:"test3",
             isSelected: false,
-            isConfirmed: false
+        }, {
+            cardId: 3,
+            cardText:"test4",
+            isSelected: false,
+        }, {
+            cardId: 4,
+            cardText:"test5",
+            isSelected: false,
+        }, {
+            cardId: 5,
+            cardText:"test6",
+            isSelected: false,
+        }, {
+            cardId: 6,
+            cardText:"test7",
+            isSelected: false,
+        }, {
+            cardId: 7,
+            cardText:"test8",
+            isSelected: false,
+        }, {
+            cardId: 8,
+            cardText:"test9",
+            isSelected: false,
         },
-        {
-            cardSet: "",
-            cardId: "",
-            cardText: "",
-            cardType: "ANSWER",
-            cardActions: "",
-            isSelected: false,
-            isConfirmed: false
-        }, {
-            cardSet: "",
-            cardId: "",
-            cardText: "",
-            cardType: "ANSWER",
-            cardActions: "",
-            isSelected: false,
-            isConfirmed: false
-        }, {
-            cardSet: "",
-            cardId: "",
-            cardText: "",
-            cardType: "ANSWER",
-            cardActions: "",
-            isSelected: false,
-            isConfirmed: false
-        }, {
-            cardSet: "",
-            cardId: "",
-            cardText: "",
-            cardType: "ANSWER",
-            cardActions: "",
-            isSelected: false,
-            isConfirmed: false
-        }, {
-            cardSet: "",
-            cardId: "",
-            cardText: "",
-            cardType: "ANSWER",
-            cardActions: "",
-            isSelected: false,
-            isConfirmed: false
-        }, {
-            cardSet: "",
-            cardId: "",
-            cardText: "",
-            cardType: "ANSWER",
-            cardActions: "",
-            isSelected: false,
-            isConfirmed: false
-        },
-
     ],
     player: {
         isDealer: false,
@@ -170,16 +138,16 @@ const initialState = {
         currentRound: 2,
         playerList: [
             {
-                playerSeat: 1,
+                playerSeat: 2,
                 playerName: "DM",
                 playerAnswer: 0,
-                playerScore: 3,
+                playerScore: 5,
                 playerAvatar: ""
             }, {
                 playerSeat: 1,
                 playerName: "Eddie",
                 playerAnswer: 2,
-                playerScore: 6,
+                playerScore: 7,
                 playerAvatar: ""
             }
         ]
@@ -194,11 +162,17 @@ const gameSlice = createSlice({
     name: "cahgame",
     initialState,
     reducers: {
-
+        
     }
 })
 
+export const playerData = createSelector(
+    (state) => state.cahgame,
+    (cahgame) => {
+        let tmp = cahgame.gameTable;
+        return tmp;
+    }
+)
 
-
-export const { } = gameSlice.actions;
+export const {  } = gameSlice.actions;
 export default gameSlice.reducer
