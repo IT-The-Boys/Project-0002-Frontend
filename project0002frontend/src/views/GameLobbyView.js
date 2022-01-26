@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import GameFilterForm from 'components/forms/GameFilterForm'
 import { useNavigate, useParams } from 'react-router'
@@ -17,6 +17,18 @@ const GameLobbyView = () => {
         if (lobbyStatus === 'idle') dispatch(getCahGameList());
     }
         , [lobbyId, navigate, lobbyList, dispatch, lobbyStatus])
+    const [isOpen, setIsOpen] = useState(false);
+
+    const togglePopup = () => {
+        setIsOpen(!isOpen);
+    }
+    console.log(lobbyId)
+    console.log(lobbyList)
+    // 本番はコメントアウト消す
+    // useEffect(() => {
+    //     if (lobbyId!=="cah"|| lobbyList.length===0) navigate("/");
+    // }
+    //    ,[lobbyId, navigate, lobbyList])
     return (
         <div>
             <h1>{lobbyId}</h1>

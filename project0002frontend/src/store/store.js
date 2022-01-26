@@ -6,6 +6,8 @@ import app from './app/appSlice'
 import modal from './ui/modalSlice'
 import cahWiki from './database/cahSlice'
 import form from './app/formSlice'
+import cahGame from './game/cahGameSlice'
+
 const reducer = combineReducers({
   chat,
   auth,
@@ -13,7 +15,8 @@ const reducer = combineReducers({
   app,
   modal,
   cahWiki,
-  form
+  form,
+  cahGame
 })
 
 const store = configureStore({
