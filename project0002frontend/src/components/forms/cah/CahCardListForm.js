@@ -1,16 +1,19 @@
-import { StyledFormContainer } from 'components/styles/form/AddCardForm.styled';
+import { StyledBtn, StyledCardText, StyledFieldGroup, StyledFooter, StyledFormContainer, StyledInputListContainer } from 'components/styles/form/AddCardForm.styled';
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { addCard } from 'store/database/cahSlice';
-import { hidePopup } from 'store/ui/modalSlice';
+import { togglePopup } from 'store/ui/modalSlice';
 import { deleteAttributesWithValue } from 'utils/ObjectUtils';
 
 const CahCardListForm = () => {
     const dispatch = useDispatch()
-    const [formData, setFormData] = useState("");
+    const [rawData, setRawData] = useState("")
     const changeHandler = (e) => {
-        const rawInput = e.target.value;
-        const rawCardList = rawInput.split('\n')
+        setRawData( e.target.value);
+    }
+    const submitHandler = (e) => {
+        e.preventDefault();
+        const rawCardList = rawData.split('\n')
         const cardList = rawCardList
             .map(card => card.split('|'))
             .map((card, i) => {
@@ -23,22 +26,34 @@ const CahCardListForm = () => {
                     }
                 }
             })
-        setFormData(cardList)
-    }
-    const submitHandler = (e) => {
-        e.preventDefault();
-        let cleanedData = deleteAttributesWithValue(formData, [null, undefined], true)
+        let cleanedData = deleteAttributesWithValue(cardList, [null, undefined], true)
         dispatch(addCard(cleanedData))
-        dispatch(hidePopup("addCardBulkPopup"));
+        dispatch(togglePopup("addCardPopup"));
 
     }
 
+    const resetHandler = () => {
+        setRawData("")
+    }
+    
     return (
         <>
             {true ?
                 <StyledFormContainer>
-                    <textarea onChange={changeHandler} placeholder="cardType|cardText|pick|0|draw|0"></textarea>
-                    <button onClick={submitHandler}>add</button>
+                    <StyledInputListContainer>
+                        <StyledFieldGroup>
+                            <StyledCardText onChange={changeHandler} cols="70" rows="20" placeholder="cardType|cardText|pick|0|draw|0" value={rawData}/>
+                        </StyledFieldGroup>
+                        <StyledFooter row={5} >
+                                <StyledBtn type="submit" 
+                                cursor="cell" 
+                                onClick={submitHandler}
+                                visible={true} disabled={ rawData ? false : true}
+                                >add</StyledBtn>
+                                <StyledBtn type="button"
+                                    visible={rawData}  cursor="pointer"onClick={resetHandler}>reset</StyledBtn>
+                            </StyledFooter>
+                    </StyledInputListContainer>
                 </StyledFormContainer> :
                 null
             }

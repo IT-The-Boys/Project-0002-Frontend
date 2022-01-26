@@ -10,6 +10,14 @@ align-items:center;
 flex-direction:column;
 `
 
+export const StyledInputListContainer = styled.div`
+  display:flex;
+  width:100%;
+  justify-content: top;
+  align-items:center;
+  flex-direction:column;
+  `
+
 export const StyledPreviewContainer = styled.div`
 -moz-transition: all 1s ease-out;
 -o-transition: all 1s ease-out;

@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit"
 
 const initialState = {
     cardForm: {
+        cardId:"",
         cardType: "ANSWER",
         cardText: "",
         pick: "",

@@ -1,5 +1,6 @@
-import { StyledScrollable, StyledScrollableBG, StyledScrollableCard } from 'components/styles/div/Scrollable.styled';
+import { StyledScrollable, StyledScrollableBG, StyledScrollableCard, StyledScrollableLink } from 'components/styles/div/Scrollable.styled';
 import React, { useEffect } from 'react'
+import { useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Outlet, useNavigate, useParams } from 'react-router';
 import { clearSetData, getSetList, setActiveExpansion } from 'store/database/cahSlice';
@@ -7,10 +8,13 @@ import { clearSetData, getSetList, setActiveExpansion } from 'store/database/cah
 
 
 const CahSetList = () => {
+    const setListRef = useRef(null)
     const sI = useParams().setId;
     const eN = useParams().expansion;
     const {
-        setList, expansionList } = useSelector((state) => state.cahWiki);
+        setList,
+        activeSet,
+        expansionList } = useSelector((state) => state.cahWiki);
     const dispatch = useDispatch();
     const navigate = useNavigate();
     useEffect(() => {
@@ -18,15 +22,44 @@ const CahSetList = () => {
         if (eI !== -1) dispatch(setActiveExpansion(eI));
         dispatch(clearSetData());
         dispatch(getSetList());
-        if (sI) navigate(sI);
+
+        const setR = setListRef.current
+        if (setR) {
+            console.log("scrolling")
+            // //find current set index
+            // const setIndex=setList.findIndex(set=>set.id===activeSet)
+            // setR.scrollTo({
+            //     left: 200*(setIndex-1),
+            //     behavior: "smooth"
+            // })
+            const onWheel = e => {
+                e.preventDefault();
+                setR.scrollTo({
+                    left: setR.scrollLeft + e.deltaY * 4,
+                    behavior: "smooth"
+                })
+            }
+            setR.addEventListener("wheel", onWheel);
+            return () => {
+                setR.removeEventListener("wheel", onWheel);
+            }
+        }
     }, [dispatch, eN, expansionList, navigate, sI])
     return (
         <>
             {setList?.length > 0 ?
-                <StyledScrollableBG>
+                <StyledScrollableBG ref={setListRef}>
                     <StyledScrollable>
                         {setList.map((set, index) =>
-                            <StyledScrollableCard key={index} data-title={set.setName}>{set.setName}</StyledScrollableCard>
+                            <StyledScrollableLink to={set.id} key={index}>
+                                <StyledScrollableCard
+                                    data-title={set.setName}
+                                    current={set.id === sI}
+                                >
+
+                                    {set.setName}
+                                </StyledScrollableCard>
+                            </StyledScrollableLink>
                         )}
                     </StyledScrollable>
                 </StyledScrollableBG>

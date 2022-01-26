@@ -1,17 +1,17 @@
-import { StyledCahCardAddIcon, StyledControllerCard } from 'components/styles/div/CahCard.styled'
+import {  StyledControllerCard } from 'components/styles/div/CahCard.styled'
 import React from 'react'
 import { useDispatch } from 'react-redux'
 import { togglePopup } from 'store/ui/modalSlice'
 
 
-const ControllerCard = ({disabled}) => {
+const ControllerCard = ({disabled, icon, functional}) => {
     const dispatch = useDispatch()
     
     return (
         <StyledControllerCard disabled={disabled} 
-        onClick={() => dispatch(togglePopup("addCardPopup"))}>
+        onClick={() => dispatch(functional)}>
 
-            <StyledCahCardAddIcon />
+            {icon}
 
         </StyledControllerCard>
     )

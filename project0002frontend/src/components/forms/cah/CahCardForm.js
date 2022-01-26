@@ -29,8 +29,16 @@ const CahCardForm = () => {
     const submitHandler = (e) => {
         e.preventDefault();
         let cleanedData = deleteAttributesWithValue(cardForm, [null, undefined], true)
+        let data={}
+        data["cardType"] = cleanedData["cardType"];
+        data["cardText"] = cleanedData["cardText"];
+        if (cleanedData.pick||cleanedData.draw) {
+            if (cleanedData.pick) data["cardActions"]["pick"]=cleanedData.pick
+            if (cleanedData.draw) data["cardActions"]["draw"]=cleanedData.draw
+        }
+   
         //ToDo add form validation
-        dispatch(addCard(cleanedData));
+        dispatch(addCard(data));
         dispatch(clearForm("cardForm"));
         dispatch(hidePopup("addCardPopup"));
     }

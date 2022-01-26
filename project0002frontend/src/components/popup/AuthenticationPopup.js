@@ -27,7 +27,6 @@ const AuthenticationPopup = () => {
           break;
         case 37:
         case 39:
-          console.log("arrow click");
           authMode === AUTH_MODE_SIGNUP ?
             dispatch(setMode(["authMode", AUTH_MODE_SIGNIN])) :
             dispatch(setMode(["authMode", AUTH_MODE_SIGNUP]))

@@ -15,11 +15,9 @@ const modalSlice = createSlice({
     initialState,
     reducers: {
         togglePopup: (state, { payload }) => {
-            console.log("toggle ", payload );
             state[payload] = !state[payload];
         },
         showPopup: (state, { payload }) => {
-            console.log("show ", payload );
             state[payload] = true;
         },
         hidePopup: (state, { payload }) => {

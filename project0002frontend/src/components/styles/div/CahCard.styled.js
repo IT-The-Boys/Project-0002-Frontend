@@ -1,4 +1,4 @@
-import { FaEdit, FaPlus, FaTrash, FaTrashRestore } from 'react-icons/fa';
+import { FaEdit, FaPlus, FaTrash, FaTrashRestore, FaSave } from 'react-icons/fa';
 import styled from 'styled-components';
 
 const multi = 3;
@@ -134,6 +134,13 @@ export const StyledCahCardAddIcon = styled(FaPlus)`
     width: 20%;
     height: 20%;
 `
+
+export const StyledCahCardSaveIcon = styled(FaSave)`
+    color:red;
+    width: 20%;
+    height: 20%;
+`
+
 export const StyledCahCard = styled.div`
     &:hover ${StyledCahCardHeader} {
         visibility: visible;

@@ -12,9 +12,9 @@ export const register = createAsyncThunk(
       // thunkAPI.dispatch(setMessage(response.data.message));
       return response.data;
     } catch (error) {
-      const message = error.response.data;
+      // const message = error.response.data;
       // thunkAPI.dispatch(setMessage(message));
-      console.log(message);
+      // console.log(message);
       return thunkAPI.rejectWithValue();
     }
   }
@@ -78,10 +78,7 @@ const initialize = () => {
     user: null
   }
   const refreshToken = _decode(user.refresh_token)?.exp;
-  console.log(refreshToken)
-  console.log(Date.now()/1000)
   if (refreshToken<Date.now()/1000) {
-    console.log("expired")
     return {
       toUrl: "",
       isOpen: false,
@@ -90,7 +87,6 @@ const initialize = () => {
       user: null
     }
   } else {
-    console.log("valid");
     return {
       toUrl: "",
       isOpen: false,
@@ -107,7 +103,6 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     showDialog(state,action) {
-      console.log("action", action)
       state.isOpen = true;
       state.registerMode= action.payload;
     },

@@ -32,7 +32,7 @@ const AuthForm = () => {
                 navigate(toUrl)
             })
             .catch(() => {
-                console.log("not successful")
+                // console.log("not successful")
             });
 
     }

@@ -3,7 +3,6 @@ import styled from 'styled-components';
 
 
 export const StyledPopupBG = styled.div`
-  z-index: 100;
   position: fixed;
   top: 0;
   right: 0;
@@ -23,7 +22,6 @@ export const StyledPopupBG = styled.div`
 export const StyledPopup = styled.div`
   position: relative;
   box-sizing: border-box;
-
   max-height: 80%;
   max-width: 80%;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);

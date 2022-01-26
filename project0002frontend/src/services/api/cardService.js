@@ -1,5 +1,6 @@
 import axios from "axios";
 import { API_URL } from "utils/constants/config";
+import authHeader from "./authHeader";
 
 
 const getSetList = (gameName, setExpansion) => {
@@ -30,11 +31,21 @@ const getSetData = (gameName, setId) => {
     })
 };
 
+const postCardData = (gameName, data) => {
+    const _URL = API_URL + `${gameName}/set/card`;
+    return axios({
+        method: "post",
+        url: "http://127.0.0.1:8080/api/v1/CAH/card",
+        data: data,
+        headers: authHeader()
+    })
+};
 
 const cardService = {
     getSetList,
     getExpansionList,
-    getSetData
+    getSetData,
+    postCardData
 };
 
 export default cardService;

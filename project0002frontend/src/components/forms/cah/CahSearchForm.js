@@ -11,7 +11,7 @@ const CahSearchForm = () => {
     const handleSubmit = e => {
         e.preventDefault();
         setInput("");
-        console.log(`Form was submited with input: ${input}`);
+        // console.log(`Form was submited with input: ${input}`);
     };
     return (
         <StyledSearchBoxContainer>

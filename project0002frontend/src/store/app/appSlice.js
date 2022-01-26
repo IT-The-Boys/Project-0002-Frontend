@@ -9,9 +9,9 @@ export const getLobbyList = createAsyncThunk(
             // thunkAPI.dispatch(setMessage(response.data.message));
             return response.data;
         } catch (error) {
-            const message = error.response.data;
+            // const message = error.response.data;
             // thunkAPI.dispatch(setMessage(message));
-            console.log(message);
+            // console.log(message);
             return thunkAPI.rejectWithValue();
         }
     }

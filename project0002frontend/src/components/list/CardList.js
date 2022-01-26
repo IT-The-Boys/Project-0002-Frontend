@@ -1,11 +1,15 @@
 import CahCard from 'components/card/CahCard'
 import ControllerCard from 'components/card/ControllerCard'
+import { StyledCahCardAddIcon, StyledCahCardSaveIcon } from 'components/styles/div/CahCard.styled'
 import { StyledCarouselBG, StyledCarouselCard, StyledCarouselCardContainer, StyledCarouselControllerContainer } from 'components/styles/div/CahCarousel.styled'
 import { StyledGrid, StyledGridBG, StyledGridCard } from 'components/styles/div/CahGrid.styled'
 import React from 'react'
 import { useEffect } from 'react'
 import { useRef } from 'react'
 import { useState } from 'react'
+import { useSelector } from 'react-redux'
+import { saveCardsToDB } from 'store/database/cahSlice'
+import { togglePopup } from 'store/ui/modalSlice'
 import { StyledCarouselReversedCard } from '../styles/div/CahCarousel.styled'
 
 const CardCarousel = ({ reversed, cardList, editMode }) => {
@@ -23,7 +27,6 @@ const CardCarousel = ({ reversed, cardList, editMode }) => {
             const onWheel = e => {
                 e.preventDefault();
                 let newIndex = currentIndex + e.deltaY / 100;
-                console.log(newIndex)
                 setCurrentIndex(Math.min(Math.max(newIndex, 0), cardList.length - displayX));
                 container.scrollTo({
                     left: container.scrollLeft + e.deltaY,
@@ -36,7 +39,7 @@ const CardCarousel = ({ reversed, cardList, editMode }) => {
             }
         }
 
-    }, [cardList.length, currentIndex])
+    }, [cardList?.length, currentIndex])
     return (
         <StyledCarouselBG>
             {editMode &&
@@ -48,7 +51,7 @@ const CardCarousel = ({ reversed, cardList, editMode }) => {
                 {
                     reversed ?
                         <>  {
-                            cardList.map((card, index) =>
+                            cardList?.map((card, index) =>
 
                                 <StyledCarouselReversedCard reversed={reversed} key={index} visible={calcDisplayIndex(index)}>
                                     <CahCard card={card} border={false} idx={index} editMode={editMode} />
@@ -70,15 +73,21 @@ const CardCarousel = ({ reversed, cardList, editMode }) => {
     )
 }
 const CardGrid = ({ cardList, editMode }) => {
+    const {tempCardIdList} = useSelector(state => state.cahWiki);
     return (
         <StyledGridBG>
             <StyledGrid>
                 {editMode &&
                     <StyledGridCard>
-                        <ControllerCard />
+                        <ControllerCard icon={<StyledCahCardAddIcon />} functional={togglePopup("addCardPopup")}/>
                     </StyledGridCard>
                 }
-                {cardList.map((card, index) =>
+                {tempCardIdList.length>0 &&
+                    <StyledGridCard>
+                        <ControllerCard icon={<StyledCahCardSaveIcon />} functional={saveCardsToDB()}/>
+                    </StyledGridCard>
+                }
+                {cardList?.map((card, index) =>
                     <StyledGridCard key={index}>
                         <CahCard card={card} border={true} idx={index} editMode={editMode} />
                     </StyledGridCard>
@@ -90,8 +99,6 @@ const CardGrid = ({ cardList, editMode }) => {
 
 
 const CardList = ({ cardList, editMode, view }) => {
-    // const count = 100;
-    // const [reversed, setReversed] = useState(false)
     return (
         <>
 

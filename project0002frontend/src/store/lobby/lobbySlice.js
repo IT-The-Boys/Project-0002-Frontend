@@ -9,9 +9,8 @@ export const getCahGameList = createAsyncThunk(
             const response = await lobbyService.getGameList();
             return response.data;
         } catch (error) {
-            const message = error.response.data;
+            // const message = error.response.data;
             // thunkAPI.dispatch(setMessage(message));
-            console.log(message);
             return thunkAPI.rejectWithValue();
         }
     }

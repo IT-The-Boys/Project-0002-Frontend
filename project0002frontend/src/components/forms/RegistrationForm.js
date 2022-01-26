@@ -2,6 +2,7 @@ import { AuthFormGroup, AuthFormInput, AuthFormLabel, AuthFormSubmit } from 'com
 import React, { useState } from 'react'
 import { useDispatch} from 'react-redux';
 import { register } from 'store/auth/authSlice';
+import { hidePopup } from 'store/ui/modalSlice';
 
 const RegistrationForm = () => {
     const [successful, setSuccessful] = useState(false);
@@ -29,17 +30,17 @@ const RegistrationForm = () => {
                 .unwrap()
                 .then(() => {
                     setSuccessful(true);
-                    console.log(successful)
+
                 })
                 .catch(() => {
                     setSuccessful(false);
-                    console.log(successful)
                 });
         } else {
             // props.showError('Passwords do not match');
-            console.log("data error")
+            // console.log("data error")
 
         }
+        if (successful) dispatch(hidePopup("authPopup"))
     }
 
     return (

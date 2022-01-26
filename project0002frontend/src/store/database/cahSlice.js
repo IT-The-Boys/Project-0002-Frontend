@@ -22,9 +22,9 @@ export const getSetList = createAsyncThunk(
             // thunkAPI.dispatch(setMessage(response.data.message));
             return response.data;
         } catch (error) {
-            const message = error.response.data;
+            // const message = error.response.data;
             // thunkAPI.dispatch(setMessage(message));
-            console.log(message);
+            // console.log(message);
             // return thunkAPI.rejectWithValue();
         }
     }
@@ -38,9 +38,9 @@ export const getSet = createAsyncThunk(
             // thunkAPI.dispatch(setMessage(response.data.message));
             return response.data;
         } catch (error) {
-            const message = error.response.data;
+            // const message = error.response.data;
             // thunkAPI.dispatch(setMessage(message));
-            console.log(message);
+            // console.log(message);
             // return thunkAPI.rejectWithValue();
         }
     }
@@ -53,14 +53,36 @@ export const getExpansionList = createAsyncThunk(
             // thunkAPI.dispatch(setMessage(response.data.message));
             return response.data;
         } catch (error) {
-            const message = error.response.data;
+            // const message = error.response.data;
             // thunkAPI.dispatch(setMessage(message));
-            console.log(message);
+            // console.log(message);
             return thunkAPI.rejectWithValue();
         }
     }
 );
 
+export const saveCardsToDB = createAsyncThunk(
+    "wiki/saveCard",
+    async (thunkAPI, { getState }) => {
+        try {
+            const { tempCardIdList, setData, activeSet } = getState().cahWiki;
+            const data = {};
+            data["cardSetId"] = activeSet;
+            data["cahCards"] = setData.cardList.filter((_, index) => tempCardIdList.some(j => j === index));
+            const _json = JSON.stringify(data);
+            console.log(_json);
+            const response = await cardService.postCardData("CAH", _json);
+            // thunkAPI.dispatch(setMessage(response.data.message));
+            // thunkAPI.dispatch(getSet());
+            return response.data;
+        } catch (error) {
+            const message = error.response.data;
+            // thunkAPI.dispatch(setMessage(message));
+             console.log(message);
+            return thunkAPI.rejectWithValue();
+        }
+    }
+);
 
 
 const cahSlice = createSlice({
@@ -76,7 +98,6 @@ const cahSlice = createSlice({
             state.dbConnect = "idle"
         },
         addCard: (state, { payload }) => {
-            console.log(payload)
             if (Array.isArray(payload)) {
                 const list = payload.map(card => {
                     card["cardId"] = `temp${state.temId++}`;
@@ -86,7 +107,7 @@ const cahSlice = createSlice({
                 list.map((id, index) => state.tempCardIdList.push(indexStart + index));
                 state.setData.cardList = state.setData.cardList.concat(list)
             } else {
-                payload["cardId"] = `temp${state.temId++}`;
+                // payload["cardId"] = `temp${state.temId++}`;
                 state.setData.cardList.push(payload);
                 state.tempCardIdList.push(state.setData.cardList.length - 1)
             }
@@ -131,6 +152,17 @@ const cahSlice = createSlice({
             state.setData = action.payload;
         },
         [getSet.rejected]: (state, action) => {
+            state.dbConnect = "failed";
+            state.error = action.error;
+        },
+        [saveCardsToDB.pending]: (state, action) => {
+            state.dbConnect = "pending";
+        },
+        [saveCardsToDB.fulfilled]: (state, action) => {
+            state.dbConnect = "succeeded";
+
+        },
+        [saveCardsToDB.rejected]: (state, action) => {
             state.dbConnect = "failed";
             state.error = action.error;
         }

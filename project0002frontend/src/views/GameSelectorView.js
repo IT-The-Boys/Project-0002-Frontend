@@ -8,15 +8,15 @@ import { getLobbyList } from 'store/app/appSlice';
 
 const GameSelectorView = () => {
 
-    const { lobbyList, status } = useSelector((state) => state.app);
+    const { lobbyList, lobbyStatus } = useSelector((state) => state.app);
     let navigate = useNavigate();
     const dispatch = useDispatch();
     const handleClick = (path) => {
         navigate(path);
     }
     useEffect(() => {
-        if (status === 'idle') dispatch(getLobbyList());
-    }, [dispatch, status, lobbyList])
+        if (lobbyStatus === 'idle') dispatch(getLobbyList());
+    }, [dispatch, lobbyStatus, lobbyList])
 
 
     return (
