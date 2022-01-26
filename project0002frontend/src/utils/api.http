@@ -1,0 +1,15 @@
+
+GET http://localhost:8080/lobby/gameServerList HTTP/1.1
+
+###
+
+POST http://localhost:8080/game/start HTTP/1.1
+content-type: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2MTk0OWE3MDg1OWQxYzI0ZTgyMTdlMDUiLCJ1c2VyUm9sZXMiOlsiR1VFU1QiLCJVU0VSIiwiTU9ERVJBVE9SIl0sImlzcyI6Imh0dHA6Ly8xMjcuMC4wLjE6ODA4MC9hcGkvdjEvdXNlci9zaWduaW4iLCJleHAiOjE2NDMxOTYxODQsInVzZXJOYW1lIjoidGVzdGVyIiwidXNlcklkIjoiNjE5NDlhNzA4NTlkMWMyNGU4MjE3ZTA1In0.JNM0zVizjaNYLlThltAL-TgIMjVTLDII0jCZCf6VbD0
+
+{
+ "player": {
+    "username":"Andreas"
+ },
+ "gameName": "lol2"
+}

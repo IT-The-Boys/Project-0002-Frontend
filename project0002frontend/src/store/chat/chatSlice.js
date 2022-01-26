@@ -1,11 +1,11 @@
-import chatService from "services/ws/chatService";
-
 const { createSlice, createSelector } = require("@reduxjs/toolkit");
 
 const initialState = {
+    chatStatus: "connecting",
     channelList: [
         {
             channelName: "Lobby",
+            channelTopic: "",
             channelDescription: "Global chat",
             channelSubscribers: [{}, {}],
             channelImage: "https://media.istockphoto.com/photos/sign-of-word-lobby-picture-id1050138060?s=612x612",
@@ -35,6 +35,7 @@ const initialState = {
         },
         {
             channelName: "Coolserver",
+            channelTopic: "",
             channelDescription: "Coolserver gamechat ",
             channelSubscribers: [{}, {}],
             channelImage: "https://thumbs.dreamstime.com/z/games-cube-word-image-hi-res-rendered-artwork-could-be-used-any-graphic-design-52989776.jpg",
@@ -52,19 +53,95 @@ const initialState = {
             isActive: false,
             newMessagesCount: 10,
         },
-    ],
 
+    ],
+    messageList: []
 
 }
+
+// export const connectToChat = createAsyncThunk(
+//     "chat/connect",
+//     async (thunkAPI) => {
+//         try {
+//             chatService.startChat();
+//             // thunkAPI.dispatch(setMessage(response.data.message));
+//         } catch (error) {
+//             console.log("error", error.response.data);
+
+//         }
+//     }
+// );
+
+// export const sendToChat = createAsyncThunk(
+//     "chat/send",
+//     async (payload, thunkAPI) => {
+//         try {
+//             console.log(payload)
+//             const response = await chatService.sendTo(payload);
+//             // thunkAPI.dispatch(setMessage(response.data.message));
+//             return response;
+//         } catch (error) {
+//             const message = error.response.data;
+//             // thunkAPI.dispatch(setMessage(message));
+//             console.log(message);
+//             return thunkAPI.rejectWithValue();
+//         }
+//     }
+// );
+
+// export const joinRoom = createAsyncThunk(
+//     "chat/join",
+//     async ({ username, password }, thunkAPI) => {
+//         try {
+//             const data = await chatService.login(username, password);
+//             return { user: data };
+//         } catch (error) {
+//             const message =
+//                 (error.response &&
+//                     error.response.data &&
+//                     error.response.data.message) ||
+//                 error.message ||
+//                 error.toString();
+//             // thunkAPI.dispatch(setMessage(message));
+//             console.log(message);
+//             return thunkAPI.rejectWithValue();
+//         }
+//     }
+// );
+
+// export const leaveRoom = createAsyncThunk(
+//     "chat/join",
+//     async ({ username, password }, thunkAPI) => {
+//         try {
+//             const data = await chatService.login(username, password);
+//             return { user: data };
+//         } catch (error) {
+//             const message =
+//                 (error.response &&
+//                     error.response.data &&
+//                     error.response.data.message) ||
+//                 error.message ||
+//                 error.toString();
+//             // thunkAPI.dispatch(setMessage(message));
+//             console.log(message);
+//             return thunkAPI.rejectWithValue();
+//         }
+//     }
+// );
 
 const chatSlice = createSlice({
     name: "chat",
     initialState,
     reducers: {
-        messagesReceived: (state, { payload }) => {
+        onConnect: (state) => void (state.chatStatus = "online")
+        ,
+        onDisconnect: (state) => void (state.chatStatus = "offline")
+        ,
+        onMessage: (state, { payload }) => {
             // append new messages to @messageList
-            return [...state.messageList, ...payload.messageList]
-
+            // return [...state.messageList, ...payload.messageList]
+            state.messageList.push(payload)
+        
         },
         addMessage: (state, { payload }) => {
             state.channelList.forEach(c => {
@@ -73,22 +150,43 @@ const chatSlice = createSlice({
         },
         switchRoom: (state, { payload }) => {
             //set all channel inactive
-            state.channelList.forEach(c =>  c.isActive=(c.channelName===payload))
+            state.channelList.forEach(c => c.isActive = (c.channelName === payload))
         },
+    },
+    extraReducers: {
+        // [connectToChat.fulfilled]: (state, action) => {
+        //   state.chatStatus = "online";
+        // },
+        // [connectToChat.rejected]: (state, action) => {
+        //   state.chatStatus = "offline";
+        // },
+        // [joinRoom.fulfilled]: (state, action) => {
+        //     state.isAuthenticated = true;
+        //     state.isOpen = false;
+        //     state.user = action.payload.user;
+        // },
+        // [joinRoom.rejected]: (state, action) => {
+        //     state.isAuthenticated = false;
+        //     state.user = null;
+        // },
+        // [leaveRoom.fulfilled]: (state, action) => {
+        //     state.isAuthenticated = false;
+        //     state.user = null;
+        //},
     },
 })
 
-const newMessageHandler = (dispatch) => (msgs) => dispatch(messagesReceived())
+// const newMessageHandler = (dispatch) => (msgs) => dispatch(onMessage())
 
 
-export const { messagesReceived, addMessage, switchRoom } = chatSlice.actions
+export const { onConnect, onDisconnect, onMessage, addMessage, switchRoom } = chatSlice.actions
 
-export const launchChat = () => async (dispatch) => {
-    chatService.subscribeHandler(newMessageHandler);
-}
-export const closeChat = () => async (dispatch) => {
-    chatService.unsubscribeHandler(newMessageHandler);
-}
+// export const launchChat = () => async (dispatch) => {
+//     chatService.subscribeHandler(newMessageHandler);
+// }
+// export const closeChat = () => async (dispatch) => {
+//     chatService.unsubscribeHandler(newMessageHandler);
+// }
 export const getCurrentChannel = createSelector(
     (state) => state.chat.channelList,
     (channelList) => {

@@ -2,10 +2,18 @@ import { configureStore, combineReducers } from '@reduxjs/toolkit'
 import chat from './chat/chatSlice'
 import auth from './auth/authSlice'
 import lobby from './lobby/lobbySlice'
+import app from './app/appSlice'
+import modal from './ui/modalSlice'
+import cahWiki from './database/cahSlice'
+import form from './app/formSlice'
 const reducer = combineReducers({
   chat,
   auth,
-  lobby
+  lobby,
+  app,
+  modal,
+  cahWiki,
+  form
 })
 
 const store = configureStore({
