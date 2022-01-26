@@ -20,6 +20,7 @@ const GlobalStyles = createGlobalStyle`
     width:100%;
     height:100%;
     font-family:  ${({ theme }) => theme.fontFamily};
+    color: white;
     margin: 0;
     overflow: hidden;
   }

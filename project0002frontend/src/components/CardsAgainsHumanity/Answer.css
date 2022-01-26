@@ -1,0 +1,11 @@
+.answer{
+    width: 450px;
+    height: 300px;
+}
+.answer:hover{
+    background-color:rgb(106, 255, 77);
+}
+
+.clear{
+    clear: both;
+}

@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { deletePlayerAnswer, setPlayerAnswer } from 'store/game/cahGameSlice'
 
-const Hand = (props) => {
+const Hand = ({confirmHandle}) => {
   const dispatch = useDispatch()
   const { playerHand, playerAnswer, currentQuestion } = useSelector(state => state.cahGame)
   console.log("answer id", playerAnswer)
@@ -35,6 +35,7 @@ const Hand = (props) => {
     if (cardPick === answerCounter) {
       togglePopup()
       console.log("Cards are Selected")
+      // confirmHandle()
     }
   }
 
@@ -47,7 +48,8 @@ return (
       </fieldset></div>
     })}
     {isOpen && <ConfirmHandPopup
-      handleClose={togglePopup}
+      handleClose={confirmHandle}
+
     />}
   </div>
 )}

@@ -14,17 +14,19 @@ const GameFilterForm = () => {
     const handleSubmit = (e) => {
         if (e.keyCode === 13){
             let filterData = {
-                playerList: 0,
-                playerLimit: 0,
-                serverHost: shost=>shost.userName.includes(host),
-                serverName: sname => sname.includes(server),
-                serverStatus: "",
-                serverId: 0,
-                timeLimit: t => t <= time,
-                timeRunning: 0,
-                scoreLimit: s => s <= score,
-                setList: [{id:0, setName:"basic"}, {id:1, setName:"se2"}],
-                setSelectedList:[],
+                // playerList: 0,
+                // playerLimit: 0,
+                // serverHost: shost=>shost.userName.includes(host),
+                // serverName: sname => sname.includes(server),
+                // serverStatus: "",
+                // serverId: 0,
+                // timeLimit: t => t <= time,
+                // timeRunning: 0,
+                // scoreLimit: s => s <= score,
+                // setList: [{id:0, setName:"basic"}, {id:1, setName:"se2"}],
+                // setSelectedList:[],
+                gameName: sname=>sname.includes(server),
+                              
             }
             //console.log(filterData)
             dispatch(setFilter(filterData))

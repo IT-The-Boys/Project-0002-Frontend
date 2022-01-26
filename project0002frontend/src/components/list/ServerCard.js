@@ -5,9 +5,9 @@ const ServerCard = ({server}) => {
     console.log(server)
     return (
         <div><fieldset>
-            <h2>{server.serverName}</h2> 
-            This game is {server.serverStatus}
-            score limit: {server.scoreLimit}<br />
+            <h2>{server.gameName}</h2> 
+            This game is {server.serverStatus?server.serverStatus:"online "}
+            score limit: {server.scoreLimit ? server.scoreLimit : "10"}<br />
             <p>card sets: {server.sets}</p>
             <p>time limit: {server.timeLimit}</p>
             {/* <button type="submit" >Join Game</button> */}

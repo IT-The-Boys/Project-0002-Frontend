@@ -33,7 +33,7 @@ const ConfirmHandPopup = (props) => {
             return <div key={id}><fieldset><button>{li}</button></fieldset></div>
           })}
         </div>
-        <span onClick={confirmHand}><button>Confirm</button></span>
+        <span onClick={props.handleClose}><button>Confirm</button></span>
       </div>
     </div>
   )

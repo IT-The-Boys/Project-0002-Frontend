@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
-import GameFilterForm from 'components/forms/GameFilterForm'
+import GameFilterForm from 'components/forms/GameFilterForm/GameFilterForm'
 import { useNavigate, useParams } from 'react-router'
 import { useDispatch, useSelector } from 'react-redux'
 import { getCahGameList } from 'store/lobby/lobbySlice'

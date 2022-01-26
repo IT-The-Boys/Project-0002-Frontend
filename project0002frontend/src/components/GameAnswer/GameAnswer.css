@@ -1,0 +1,33 @@
+.cardsBox{
+    overflow: auto;
+}
+
+.blackcard{
+    float: left;
+    width: auto;
+    /* background-color: violet; */
+    /* overflow: hidden; */
+}
+
+.white{
+    float: left;
+    width: 60%;
+    margin: auto;
+    overflow: auto; /* scroll or not, depand on need */
+    /* background-color: blue; */
+}
+
+.buttonConfirm{
+    float: left;
+}
+
+.buttonLeave{
+    float: right;
+}
+
+
+
+
+/* .whitecard{
+    float: left;
+} */

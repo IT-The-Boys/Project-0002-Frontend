@@ -1,10 +1,13 @@
+import AnswerSelectPopup from 'components/popup/AnswerSelectPopup'
 import React, { useEffect } from 'react'
+import { useState } from 'react'
 import { useNavigate, useParams } from 'react-router'
 import GameStatus from './GameStatus'
 import Hand from './Hand'
 
 const GameScreenView = () => {
     const gameId = useParams().gameId
+    const [seletion, setSelecton] = useState(true)
     const navigate = useNavigate()
     useEffect(() => {
         if (gameId === "") navigate("/")
@@ -16,9 +19,16 @@ const GameScreenView = () => {
             <div className='gameArea'>
                 {/* <Question />
                 <Answers /> */}
-                <Hand />
-                <GameStatus />
+                {seletion ? <>
+                    <Hand confirmHandle={()=>setSelecton(false)}/>
+                    <GameStatus />
+
+                </> :
+                    <AnswerSelectPopup />
+                }
+
             </div>
+            {/* <ServerList /> */}
         </div>
     )
 }

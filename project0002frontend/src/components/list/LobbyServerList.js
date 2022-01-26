@@ -7,7 +7,7 @@ const LobbyServerList = () => {
     const servers = useSelector(getFilteredServerList);
     return (
         <div>
-            {servers.map((s, index)=><ServerCard key={index} server={s} />)}
+            {servers?.map((s, index)=><ServerCard key={index} server={s} />)}
         </div>
     )
 }

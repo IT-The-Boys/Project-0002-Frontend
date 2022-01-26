@@ -115,7 +115,7 @@ const lobbySlice = createSlice({
         },
         [getCahGameList.fulfilled]: (state, {payload}) => {
             state.status = "succeeded";
-            state.serverList = payload;
+            state.serverList = Object.values(payload);
         },
         [getCahGameList.rejected]: (state, payload) => {
             state.status = "failed";
@@ -129,6 +129,7 @@ const lobbySlice = createSlice({
 export const getFilteredServerList = createSelector(
     (state) => state.lobby,
     (lobby) => {
+
         let filter = lobby.serverFilter;
         let filterKeys = Object.keys(filter);
         return lobby.serverList.filter(item => {
