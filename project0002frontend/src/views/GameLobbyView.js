@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react'
-import ServerList from 'components/serverlist'
+
 import GameFilterForm from 'components/forms/GameFilterForm'
 import { useNavigate, useParams } from 'react-router'
 import { useDispatch, useSelector } from 'react-redux'
 import { getCahGameList } from 'store/lobby/lobbySlice'
+import LobbyServerList from 'components/list/LobbyServerList'
 const GameLobbyView = () => {
     const lobbyId = useParams().lobbyId;
     const { lobbyList } = useSelector((state) => state.app);
@@ -23,7 +24,7 @@ const GameLobbyView = () => {
             <GameFilterForm />
             
             {/* -><CreateGamePopup />> */}
-            <ServerList />
+            <LobbyServerList />
         </div>
     )
 }
